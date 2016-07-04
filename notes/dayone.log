@@ -1,0 +1,1169 @@
+﻿Python 2.7.11 (v2.7.11:6d1b6a68f775, Dec  5 2015, 12:54:16) 
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type "copyright", "credits" or "license()" for more information.
+>>> s = [10, 20, 30, 40, 50]
+>>> s[:3]
+[10, 20, 30]
+>>> s[1:3]
+[20, 30]
+>>> 
+>>> s = [10, 20, 30, 40, 50]
+>>> t = s
+>>> u = s[:]
+>>> 
+>>> 
+>>> map(id, [s, t, u])
+[4363863680, 4363863680, 4363864400]
+>>> map(hex, map(id, [s, t, u]))
+['0x1041b4680', '0x1041b4680', '0x1041b4950']
+>>> s.append(60)
+>>> s
+[10, 20, 30, 40, 50, 60]
+>>> t
+[10, 20, 30, 40, 50, 60]
+>>> u
+[10, 20, 30, 40, 50]
+>>> s is t
+True
+>>> s is u
+False
+>>> 
+>>> 
+>>> 
+
+
+
+>>> 
+>>> 
+>>> 
+>>> 
+>>> s = [10, 20, 30, 40, 50]
+>>> s[0] = 111
+>>> s
+[111, 20, 30, 40, 50]
+>>> s[1:3] = [222, 333]
+>>> s
+[111, 222, 333, 40, 50]
+>>> s[1:3] = [1, 2, 3, 4, 5, 6, 7]
+>>> s
+[111, 1, 2, 3, 4, 5, 6, 7, 40, 50]
+>>> 
+>>> s[1:3] = []
+>>> s
+[111, 3, 4, 5, 6, 7, 40, 50]
+>>> s[:]
+[111, 3, 4, 5, 6, 7, 40, 50]
+>>> s[:] = []
+>>> 
+>>> s = [10, 20, 30, 40, 50]
+>>> del s[2]
+>>> s
+[10, 20, 40, 50]
+>>> 
+>>> s = [10, 20, 30, 40, 50]
+>>> s[1:3]
+[20, 30]
+>>> del s[1:3]
+>>> s
+[10, 40, 50]
+>>> 
+>>> del s[:]
+>>> s[:] = []
+>>> 
+>>> 
+>>> s = [100] * 100
+>>> s
+[100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+>>> 
+>>> t = [s] * 100
+>>> t[0]
+[100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+>>> t[1]
+[100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+>>> 
+>>> del s
+>>> del t
+>>> 
+>>> 
+>>> 
+>>> s = [10, 20]
+>>> s.append(30)
+>>> s
+[10, 20, 30]
+>>> s
+[10, 20, 30]
+>>> s.append('hello')
+>>> s
+[10, 20, 30, 'hello']
+>>> s.append(s)
+>>> s
+[10, 20, 30, 'hello', [...]]
+>>> s[0]
+10
+>>> s[4][0]
+10
+>>> s[4][4][4][4][4][4][0]
+10
+>>> del s
+>>> import gc
+>>> gc.collect()
+1
+>>> # pypy jython ironpython
+>>> # python java    dotnet
+>>> 
+>>> # GIL -> CPU bound prefer threads for IO bound
+>>> # Multiprocessing lets you use all the cores
+>>> 
+>>> # Alex Martelli
+>>> #    1            |  2-8                   |  more than 8
+>>> # single              threads                  distributed
+>>> # wimpy cpus	           ^                       uncommon
+>>> #    1                       | t | big data
+>>> #                              |
+>>> 
+>>> #                             gamers
+>>> #                             cisco
+>>> 
+>>> # Visual Studio  (Python plugin) Intellisense
+>>> 
+>>> 
+>>> s = [10, 20, 30, 40, 50]
+>>> s[1:3] = [1,2,3,4,5]
+>>> s
+[10, 1, 2, 3, 4, 5, 40, 50]
+>>> s[1:3] = []
+>>> 
+>>> 
+>>> s = 'hello'
+>>> s[0:3]
+'hel'
+>>> s[0] + s[1] + s[2]
+'hel'
+>>> s = 'hello'
+>>> 
+>>> s[1:3]
+'el'
+>>> s[1:2]
+'e'
+>>> s[1:1]
+''
+>>> s = [10, 20, 30, 40, 50]
+>>> s[2:2]
+[]
+>>> s[2:2] = [1,2,3]
+>>> s
+[10, 20, 1, 2, 3, 30, 40, 50]
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+>>> area(10)
+314.15700000000004
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+TestResults(failed=0, attempted=1)
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+**********************************************************************
+File "/Users/raymond/Dropbox/Public/sj134/algebra.py", line 10, in __main__.area
+Failed example:
+    area(10)
+Expected:
+    314.15700000000004
+Got:
+    314.25700000000006
+**********************************************************************
+1 items had failures:
+   1 of   1 in __main__.area
+***Test Failed*** 1 failures.
+TestResults(failed=1, attempted=1)
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+TestResults(failed=0, attempted=1)
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+TestResults(failed=0, attempted=1)
+>>> 
+>>> 
+>>> 
+>>> from autodiff import *
+
+Traceback (most recent call last):
+  File "<pyshell#117>", line 1, in <module>
+    from autodiff import *
+ImportError: No module named autodiff
+>>> from autodiff import *
+>>> 
+>>> x = Num(3.5)
+>>> y = 2 * x ** 3
+>>> y
+85.75
+>>> y.dx
+0.0
+>>> 
+>>> x = Var(3.5)
+>>> d(u)
+
+Traceback (most recent call last):
+  File "<pyshell#126>", line 1, in <module>
+    d(u)
+NameError: name 'u' is not defined
+>>> from autodiff import *
+>>> dir()
+['Num', 'Var', '__builtins__', '__doc__', '__file__', '__name__', '__package__', 'acos', 'acosh', 'area', 'asin', 'asinh', 'atan', 'atanh', 'ceil', 'copysign', 'cos', 'cosh', 'curl', 'd', 'degrees', 'directional_derivative', 'divergence', 'division', 'doctest', 'e', 'exp', 'expm1', 'fabs', 'floor', 'fmod', 'fsum', 'gradient', 'hypot', 'log', 'log10', 'log1p', 'log2', 'math', 'partial', 'pi', 'quadratic', 'radians', 'sin', 'sinh', 'sqrt', 'tan', 'tanh', 'trunc', 'x', 'y']
+>>> d(x)
+1.0
+>>> 
+>>> 
+>>> x = Var(3.5)
+>>> y = 2 * x ** 3
+>>> y
+85.75
+>>> y.dx
+73.5
+>>> def f(x):
+        return (1.7 - 3 * cos(x) ** 2 / sin(3 * x) * 0.1 * exp(+cos(x)) +
+                sqrt(abs(x - 4.13)) + tan(2.5 * x) * log(3.1 * x**1.5) +
+                (4.7 * x + 3.1) ** cos(0.43 * x + 8.1) - 2.9 + tan(-x) +
+                sqrt(radians(log(x) + 1.7)) + e / x + expm1(x / pi))
+
+>>> f(3.5)
+0.031875235478814545
+>>> x = Var(3.5)
+>>> f(3.5)
+0.031875235478814545
+>>> d(_)
+0.0
+>>> y = f(3.5)
+>>> d(y)
+0.0
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+TestResults(failed=0, attempted=1)
+>>> x1, x2 = quadratic(a=8, b=22, c=15)
+>>> x1
+-1.25
+>>> x2
+-1.5
+>>> x1, x2 = quadratic(a=8, b=22, c=15)
+>>> 8 * x1**2.0 + 22 * x + 15
+
+Traceback (most recent call last):
+  File "<pyshell#148>", line 1, in <module>
+    8 * x1**2.0 + 22 * x + 15
+NameError: name 'x' is not defined
+>>> 8 * x1**2.0 + 22 * x1 + 15
+0.0
+>>> 8 * x2**2.0 + 22 * x2 + 15
+0.0
+>>> 
+>>> x1, x2 = quadratic(a=8, b=22, c=15)
+>>> 8 * x1**2.0 + 22 * x1 + 15
+0.0
+>>> 8 * x2**2.0 + 22 * x2 + 15
+0.0
+>>> x1, x2
+(-1.25, -1.5)
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+TestResults(failed=0, attempted=5)
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+**********************************************************************
+File "/Users/raymond/Dropbox/Public/sj134/algebra.py", line 22, in __main__.quadratic
+Failed example:
+    8 * x2**2.0 + 22 * x2 + 15
+Expected:
+    0.0
+Got:
+    6.0
+**********************************************************************
+File "/Users/raymond/Dropbox/Public/sj134/algebra.py", line 24, in __main__.quadratic
+Failed example:
+    x1, x2
+Expected:
+    (-1.25, -1.5)
+Got:
+    (-1.25, -0.5)
+**********************************************************************
+1 items had failures:
+   2 of   4 in __main__.quadratic
+***Test Failed*** 2 failures.
+TestResults(failed=2, attempted=5)
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+TestResults(failed=0, attempted=5)
+>>> area(base=10, height=6)
+
+Traceback (most recent call last):
+  File "<pyshell#156>", line 1, in <module>
+    area(base=10, height=6)
+TypeError: area() got an unexpected keyword argument 'base'
+>>> area_triangle(base=10, height=6)
+30.0
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+TestResults(failed=0, attempted=6)
+>>> area_triangle(base=10, height=-6)
+-30.0
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+TestResults(failed=0, attempted=6)
+>>> area_triangle(base=10, height=-6)
+
+Traceback (most recent call last):
+  File "<pyshell#159>", line 1, in <module>
+    area_triangle(base=10, height=-6)
+  File "/Users/raymond/Dropbox/Public/sj134/algebra.py", line 24, in area_triangle
+    raise RuntimeError('Imaginary numbers are only supported in complex arithmetic')
+RuntimeError: Imaginary numbers are only supported in complex arithmetic
+>>> 3.5 + 2
+5.5
+>>> 3.5 + 2.5 + 2
+8.0
+>>> import math
+>>> math.sqrt(-4)
+
+Traceback (most recent call last):
+  File "<pyshell#163>", line 1, in <module>
+    math.sqrt(-4)
+ValueError: math domain error
+>>> math.sqrt('hello')
+
+Traceback (most recent call last):
+  File "<pyshell#164>", line 1, in <module>
+    math.sqrt('hello')
+TypeError: a float is required
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+TestResults(failed=0, attempted=6)
+>>> 
+>>> 
+>>> 
+>>> s = 'hello'
+>>> n = len(s)
+>>> 
+>>> 
+>>> s[4]
+'o'
+>>> s[5 - 1]
+'o'
+>>> s[len(s) - 1]
+'o'
+>>> s[-1]
+'o'
+>>> 
+>>> s[50]
+
+Traceback (most recent call last):
+  File "<pyshell#177>", line 1, in <module>
+    s[50]
+IndexError: string index out of range
+>>> 
+>>> 
+>>> s
+'hello'
+>>> s[4]
+'o'
+>>> s[3]
+'l'
+>>> s[2]
+'l'
+>>> s[1]
+'e'
+>>> s[0]
+'h'
+>>> s[-1]
+'o'
+>>> s[-2]
+'l'
+>>> s[-3]
+'l'
+>>> s[-4]
+'e'
+>>> s[-5]
+'h'
+>>> s[-6]
+
+Traceback (most recent call last):
+  File "<pyshell#191>", line 1, in <module>
+    s[-6]
+IndexError: string index out of range
+>>> 
+>>> 
+>>> # RaymondTel  3003
+>>> 2 ** 3
+8
+>>> # 000 001 010 011 100 101 110 111
+>>> # 0   ...                      7
+>>> 
+>>> # RaymondTel  4004
+>>> 2 ** 4
+16
+>>> # 1st bit is a sign bit
+>>> # 0001  -> 1
+>>> #
+>>> # negative 1xyz     8 negative
+>>> # 0000              1 zero
+>>> # positive          7 positive
+>>> 
+>>> # -32768 <= x <= 32767
+>>> 
+>>> # ~x is closed  w x y z   ~w ~x ~y ~z
+>>> # -x is not closed
+>>> x = -8
+>>> -x
+8
+>>> 
+>>> 
+>>> -0 == 0
+True
+>>> -0
+0
+>>> 
+>>> -0.0
+-0.0
+>>> -0.0 == 0.0
+True
+>>> 
+>>> 
+>>> 
+>>> s = 'abc'
+>>> n = 2; s * n
+'abcabc'
+>>> 
+>>> 
+>>> s = 'abc'
+>>> i=3 ; s[-i:]            # Give me the last three letters
+'abc'
+>>> i=2 ; s[-i:]            # Give me the last two letters
+'bc'
+>>> i=1 ; s[-i:]            # Give me the last one letters
+'c'
+>>> i=0 ; s[-i:]            # Give me the last zero letters <-- Argh!!!
+'abc'
+>>> 
+>>> i=3 ; s[:-i]            # Give all but the last three letters
+''
+>>> i=2 ; s[:-i]            # Give all but the last two letters
+'a'
+>>> i=1 ; s[:-i]            # Give all but the last one letter
+'ab'
+>>> i=0 ; s[:-i]            # Give all but the last zero letters <-- Argh!
+''
+>>> 
+>>> 
+>>> # pure function -- that has the same outputs for the same input every time
+>>> #                  AND there are no side-effects.
+>>> 
+>>> pow(2, 5)
+32
+>>> pow(2, 6)
+64
+>>> pow(2, 5)
+32
+>>> pow(2, 6)
+64
+>>> 
+>>> from time import time
+>>> time()
+1456177249.025206
+>>> time()
+1456177252.907444
+>>> 
+>>> from random import random
+>>> random()
+0.27539084717775597
+>>> random()
+0.5931628655424539
+>>> random()
+0.13731614092229882
+>>> def f(x):
+	return x ** 2
+
+>>> f(3)
+9
+>>> y = 10
+>>> def f(x):
+	return x * y
+
+>>> f(5)
+50
+>>> 
+>>> 
+>>> def f(x):
+	global y
+	y += 1
+	return x * y
+
+>>> y = 10
+>>> f(5)
+55
+>>> f(5)
+60
+>>> y
+12
+>>> def f(x):
+	global y
+	y += 1
+	return x * y
+
+>>> y = 20
+>>> 
+>>> a, b = f(5), f(10)
+>>> 
+>>> a
+105
+>>> b
+220
+>>> 
+>>> y = 20
+>>> b, a = f(10), f(5)
+>>> a
+110
+>>> b
+210
+>>> # Never use impure functions with multiple assignment
+>>> # because it spoils the illusion of being simultaneous
+>>> y = 20
+>>> # a, b = f(5), f(10)
+>>> a = f(5)
+>>> b = f(10)
+>>> 
+>>> 
+>>> 
+>>> a, b, a = 10, 20, 30
+>>> a
+30
+>>> # Never use repeated variables with multiple assignment
+>>> # because it spoils the illusion of being simultaneous
+>>> 
+>>> 
+>>> arr = [10, 20, 30]
+>>> i = 0
+>>> 
+>>> i, arr[i] = i+1, 50
+>>> arr
+[10, 50, 30]
+>>> 
+>>> i = 0
+>>> 
+>>> arr[i], i = 50, i+1
+>>> arr
+[50, 50, 30]
+>>> 
+>>> i = 0
+>>> 
+>>> i += 1
+>>> arr[i] = 50
+>>> 
+>>> 
+>>> names = 'ruby python perl'.split()
+>>> colors = 'red green yellow blue'.split()
+>>> 
+>>> for i in range(5):
+	print i**2
+
+	
+0
+1
+4
+9
+16
+>>> for i in range(len(colors)):
+	print colors[i]
+
+	
+red
+green
+yellow
+blue
+>>> for color in colors:
+	print color.upper()
+
+	
+RED
+GREEN
+YELLOW
+BLUE
+>>> for i in range(len(colors)):
+	print i, '-->', colors[i]
+
+	
+0 --> red
+1 --> green
+2 --> yellow
+3 --> blue
+>>> for i, color in enumerate(colors):
+	print i, '-->', color
+
+	
+0 --> red
+1 --> green
+2 --> yellow
+3 --> blue
+>>> for i, color in enumerate(colors, 1001):
+	print i, '-->', color
+
+	
+1001 --> red
+1002 --> green
+1003 --> yellow
+1004 --> blue
+>>> len(colors)
+4
+>>> [3, 2, 1, 0]
+[3, 2, 1, 0]
+>>> range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> range(2, 10)
+[2, 3, 4, 5, 6, 7, 8, 9]
+>>> len(range(2, 10))
+8
+>>> range(2, 10, 3)
+[2, 5, 8]
+>>> # START STOP STE{
+>>> [3, 2, 1, 0]
+[3, 2, 1, 0]
+>>> range(len(colors) - 1)
+[0, 1, 2]
+>>> range(len(colors) - 1, 0, -1)
+[3, 2, 1]
+>>> range(len(colors) - 1, -1, -1)
+[3, 2, 1, 0]
+>>> for i in range(len(colors) - 1, -1, -1):
+	print colors[i]
+
+	
+blue
+yellow
+green
+red
+>>> for color in reversed(colors):
+	print color
+
+	
+blue
+yellow
+green
+red
+>>> 
+>>> 
+>>> colors
+['red', 'green', 'yellow', 'blue']
+>>> names
+['ruby', 'python', 'perl']
+>>> 
+>>> # <posres> if <cond> else <negres>
+>>> score = 50
+>>> 'pass' if score >= 70 else 'fail'
+'fail'
+>>> score = 80
+>>> 'pass' if score >= 70 else 'fail'
+'pass'
+>>> 
+>>> 
+>>> colors
+['red', 'green', 'yellow', 'blue']
+>>> names
+['ruby', 'python', 'perl']
+>>> n = len(colors) if len(colors) < len(names) else len(names)
+>>> for i in range(n):
+	print colors[i], '<--', names[i]
+
+	
+red <-- ruby
+green <-- python
+yellow <-- perl
+>>> min(40, 2, 50)
+2
+>>> 
+>>> n = min(len(colors), len(names))
+>>> for i in range(n):
+	print colors[i], '<--', names[i]
+
+	
+red <-- ruby
+green <-- python
+yellow <-- perl
+>>> 
+>>> zip(colors, names)
+[('red', 'ruby'), ('green', 'python'), ('yellow', 'perl')]
+>>> 
+>>> 
+>>> for name, color in zip(names, colors):
+	print color, '<--', name
+
+	
+red <-- ruby
+green <-- python
+yellow <-- perl
+>>> 
+>>> 
+>>> 
+>>> dir(object)
+['__class__', '__delattr__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+>>> 
+>>> a = 5
+>>> b = 10
+>>> a + b
+15
+>>> a.__add__(b)            # dunder add
+15
+>>> type(a)
+<type 'int'>
+>>> dir(type(a))
+['__abs__', '__add__', '__and__', '__class__', '__cmp__', '__coerce__', '__delattr__', '__div__', '__divmod__', '__doc__', '__float__', '__floordiv__', '__format__', '__getattribute__', '__getnewargs__', '__hash__', '__hex__', '__index__', '__init__', '__int__', '__invert__', '__long__', '__lshift__', '__mod__', '__mul__', '__neg__', '__new__', '__nonzero__', '__oct__', '__or__', '__pos__', '__pow__', '__radd__', '__rand__', '__rdiv__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__', '__rmul__', '__ror__', '__rpow__', '__rrshift__', '__rshift__', '__rsub__', '__rtruediv__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__trunc__', '__xor__', 'bit_length', 'conjugate', 'denominator', 'imag', 'numerator', 'real']
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/circuitous.py =========
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/circuitous.py =========
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/circuitous.py =========
+>>> c = Circle(10)
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/circuitous.py =========
+>>> c = Circle(10)
+>>> c.area()
+314.0
+>>> c.radius
+10
+>>> 6.28
+6.28
+>>> NUM_ACCUMULATION_PASSES = 7
+>>> 
+>>> 
+>>> 
+>>> # Pi 3:14:15.9
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/circuitous.py =========
+>>> c = Circle(10)
+>>> c.area()
+314.1592653589793
+>>> 
+=========== RESTART: /Users/raymond/Dropbox/Public/sj134/client.py ===========
+Tutorial for Circuitous(tm)
+>>> 
+=========== RESTART: /Users/raymond/Dropbox/Public/sj134/client.py ===========
+Tutorial for Circuitous(tm)
+>>> 
+=========== RESTART: /Users/raymond/Dropbox/Public/sj134/client.py ===========
+Tutorial for Circuitous™
+>>> 
+=========== RESTART: /Users/raymond/Dropbox/Public/sj134/client.py ===========
+Tutorial for Circuitous™
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/circuitous.py =========
+>>> c = Circle(10)
+>>> c.version
+0.1
+>>> c.radius
+10
+>>> d = Circle(12)
+>>> c.radius
+10
+>>> c.version
+0.1
+>>> c.__dict__
+{'version': 0.1, 'radius': 10}
+>>> d.__dict__
+{'version': 0.1, 'radius': 12}
+>>> Circle.version
+
+Traceback (most recent call last):
+  File "<pyshell#414>", line 1, in <module>
+    Circle.version
+AttributeError: type object 'Circle' has no attribute 'version'
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/circuitous.py =========
+>>> c = Circle(10)
+>>> d = Circle(12)
+>>> c.__dict__
+{'radius': 10}
+>>> d.__dict__
+{'radius': 12}
+>>> c.version
+0.1
+>>> d.version
+0.1
+>>> 
+>>> # Kronecker:  God made the integers, all the rest is the work of man
+>>> 
+>>> 11 + 22 == 33
+True
+>>> 1.1 + 2.2 == 3.3
+False
+>>> s = 1.1 + 2.2
+>>> t = 3.3
+>>> s
+3.3000000000000003
+>>> t
+3.3
+>>> # 11/10 == n / 2 ** m
+>>> 
+>>> f = 5.25
+>>> f.as_integer_ratio()
+(21, 4)
+>>> bin(21)
+'0b10101'
+>>> 
+>>> f = 2.2
+>>> f.as_integer_ratio()
+(2476979795053773, 1125899906842624)
+>>> import math
+>>> math.log(1125899906842624, 2)
+50.0
+>>> 2 ** 50
+1125899906842624
+>>> bin(2476979795053773)
+'0b1000110011001100110011001100110011001100110011001101'
+>>> # 2/3 as 0.667      2/3 != 667/1000
+>>> 
+>>> 
+>>> s = 1.1 + 2.2
+>>> t
+3.3
+>>> s == t
+False
+>>> abs(s - t) < 0.000000001
+True
+>>> 
+>>> 
+>>> [0.1] * 10
+[0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+>>> sum([0.1] * 10) == 1.0
+False
+>>> sum([0.1] * 10)
+0.9999999999999999
+>>> # assert Circle.version + 0.3 >= 0.6
+>>> 
+>>> 0.1.1
+SyntaxError: invalid syntax
+>>> 
+>>> sorted(['raymond', 'rachel', 'matthew'])
+['matthew', 'rachel', 'raymond']
+>>> from pprint import pprint
+>>> pprint(sorted([
+	(5, 100, 2),
+	(10, 999, 6666666),
+	(5, 234523452345, 234523452345),
+	(10, 1, 2345234523452345234523452345),
+]))
+[(5, 100, 2),
+ (5, 234523452345, 234523452345),
+ (10, 1, 2345234523452345234523452345L),
+ (10, 999, 6666666)]
+>>> 
+>>> todo = [
+	(50, 'teach python'),
+	(0, 'wake up'),
+	(25, 'feed son'),
+	(100, 'sleep'),
+	(40, 'feed self'),
+]
+>>> pprint(sorted(todo))
+[(0, 'wake up'),
+ (25, 'feed son'),
+ (40, 'feed self'),
+ (50, 'teach python'),
+ (100, 'sleep')]
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/circuitous.py =========
+>>> version = '2.7.9'
+>>> assert version >= '2.7.6'
+>>> version = '2.7.10'
+>>> assert version >= '2.7.6'
+
+Traceback (most recent call last):
+  File "<pyshell#479>", line 1, in <module>
+    assert version >= '2.7.6'
+AssertionError
+>>> 
+>>> 
+>>> 
+>>> 5 > "2"
+False
+>>> 5 > "10"
+False
+>>> 
+>>> version = (2, 7, 9)
+>>> assert version >= (2, 7, 6)
+>>> assert version >= (2, 7, 6)
+>>> version = (2, 7, 10)
+>>> assert version >= (2, 7, 6)
+>>> # float   str    tuples
+>>> 
+>>> 
+>>> 
+>>> p = 170, 0.4, 0.6
+>>> 
+>>> type(p)
+<type 'tuple'>
+>>> p[0]
+170
+>>> p[-1]
+0.6
+>>> p[:2]
+(170, 0.4)
+>>> a, b, c = p
+>>> len(p)
+3
+>>> if p[1] >= 0.5:
+	print 'Whew!  That is bright!'
+
+	
+>>> if p[2] >= 0.5:
+	print 'Whew!  That is light!'
+
+	
+Whew!  That is light!
+>>> from collections import namedtuple
+>>> Color = namedtuple('Color', ['hue', 'saturation', 'luminosity'])
+>>> issubclass(Color, tuple)
+True
+>>> p = Color(170, 0.4, 0.6)
+>>> len(p)
+3
+>>> p[0]
+170
+>>> p[:2]
+(170, 0.4)
+>>> a, b, c = p
+>>> 
+>>> p
+Color(hue=170, saturation=0.4, luminosity=0.6)
+>>> p[0]
+170
+>>> p.hue
+170
+>>> 
+>>> 
+>>> import time
+>>> tuple(time.localtime())
+(2016, 2, 22, 16, 52, 54, 0, 53, 0)
+>>> time.localtime()
+time.struct_time(tm_year=2016, tm_mon=2, tm_mday=22, tm_hour=16, tm_min=53, tm_sec=31, tm_wday=0, tm_yday=53, tm_isdst=0)
+>>> 
+>>> 
+>>> import sys
+>>> sys.version
+'2.7.11 (v2.7.11:6d1b6a68f775, Dec  5 2015, 12:54:16) \n[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]'
+>>> type(_)
+<type 'str'>
+>>> sys.version >= '2.7.9'
+False
+>>> tuple(sys.version_info)
+(2, 7, 11, 'final', 0)
+>>> tuple(sys.version_info) >= (2, 7, 9)
+True
+>>> sys.version_info
+sys.version_info(major=2, minor=7, micro=11, releaselevel='final', serial=0)
+>>> sys.version_info[:2] == (2, 7)
+True
+>>> sys.version_info.releaselevel
+'final'
+>>> sys.version_info[3]
+'final'
+>>> r = 0, 5
+>>> r
+(0, 5)
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/algebra.py ==========
+TestResults(failed=0, attempted=6)
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/circuitous.py =========
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/circuitous.py", line 28, in <module>
+    from collection import namedtuple   # named tuples make code more self-documenting
+ImportError: No module named collection
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/circuitous.py =========
+>>> Circle.version
+Version(major=0, minor=1, micro=1)
+>>> Circle.version.minor
+1
+>>> 
+=========== RESTART: /Users/raymond/Dropbox/Public/sj134/client.py ===========
+Tutorial for Circuitous™
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/client.py", line 4, in <module>
+    print 'Software version %s' % Circle.version
+NameError: name 'Circle' is not defined
+>>> 
+=========== RESTART: /Users/raymond/Dropbox/Public/sj134/client.py ===========
+Tutorial for Circuitous™
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/client.py", line 6, in <module>
+    print 'Software version %s' % Circle.version
+TypeError: not all arguments converted during string formatting
+>>> 
+=========== RESTART: /Users/raymond/Dropbox/Public/sj134/client.py ===========
+Tutorial for Circuitous™
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/client.py", line 6, in <module>
+    print 'Software version %d.%d' % Circle.version
+TypeError: not all arguments converted during string formatting
+>>> len(Circle.version)
+3
+>>> 
+=========== RESTART: /Users/raymond/Dropbox/Public/sj134/client.py ===========
+Tutorial for Circuitous™
+Software version 0.1
+>>> 
+=========== RESTART: /Users/raymond/Dropbox/Public/sj134/client.py ===========
+Tutorial for Circuitous™
+Software version 0.1
+A circle with a radius of 10
+has an area of 314.159265359
+
+>>> import this
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+>>> 
+>>> 
+>>> # Beautiful sister is Python with our own beautiful ways
+>>> # Our two ugly step-sisters, Java and C++
+>>> 
+>>> 
+>>> 
+>>> 
+=========== RESTART: /Users/raymond/Dropbox/Public/sj134/client.py ===========
+Tutorial for Circuitous™
+Software version 0.1
+A circle with a radius of 10
+has an area of 314.159265359
+
+>>> 
+=========== RESTART: /Users/raymond/Dropbox/Public/sj134/client.py ===========
+Tutorial for Circuitous™
+Software version 0.1
+A circle with a radius of 10
+has an area of 314.159265359
+
+DARPA grant proposal
+to study the average area of random circles
+using Circuitous version 0.1
+>>> 
+>>> from random import *
+>>> random()                 # 0.0 <= x < 1.0
+0.8615686766001748
+>>> seed(8675309)
+>>> random()
+0.40224696110279223
+>>> random()
+0.5102471779215914
+>>> 
+>>> 
+>>> 
+>>> 
+=============================== RESTART: Shell ===============================
+>>> import random
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'random']
+>>> type(random)
+<type 'module'>
+>>> 
+>>> dir(random)
+['BPF', 'LOG4', 'NV_MAGICCONST', 'RECIP_BPF', 'Random', 'SG_MAGICCONST', 'SystemRandom', 'TWOPI', 'WichmannHill', '_BuiltinMethodType', '_MethodType', '__all__', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '_acos', '_ceil', '_cos', '_e', '_exp', '_hashlib', '_hexlify', '_inst', '_log', '_pi', '_random', '_sin', '_sqrt', '_test', '_test_generator', '_urandom', '_warn', 'betavariate', 'choice', 'division', 'expovariate', 'gammavariate', 'gauss', 'getrandbits', 'getstate', 'jumpahead', 'lognormvariate', 'normalvariate', 'paretovariate', 'randint', 'random', 'randrange', 'sample', 'seed', 'setstate', 'shuffle', 'triangular', 'uniform', 'vonmisesvariate', 'weibullvariate']
+>>> random.seed(8675309)
+>>> 
+>>> import random
+>>> seed(2345234)
+
+Traceback (most recent call last):
+  File "<pyshell#567>", line 1, in <module>
+    seed(2345234)
+NameError: name 'seed' is not defined
+>>> 
+=============================== RESTART: Shell ===============================
+>>> from random import seed
+>>> seed(123525)
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'seed']
+>>> from random import *
+>>> dir()
+['Random', 'SystemRandom', 'WichmannHill', '__builtins__', '__doc__', '__name__', '__package__', 'betavariate', 'choice', 'expovariate', 'gammavariate', 'gauss', 'getrandbits', 'getstate', 'jumpahead', 'lognormvariate', 'normalvariate', 'paretovariate', 'randint', 'random', 'randrange', 'sample', 'seed', 'setstate', 'shuffle', 'triangular', 'uniform', 'vonmisesvariate', 'weibullvariate']
+>>> seed(123525)
+>>> 
+>>> 
+>>> c = 10
+>>> d = 11
+>>> e = 12
+>>> f = 13
+>>> g = 14
+>>> from math import *
+>>> log(c)
+2.302585092994046
+>>> log(d)
+2.3978952727983707
+>>> log(e)
+1.0
+>>> log(f)
+2.5649493574615367
+>>> log(g)
+2.6390573296152584
+>>> c
+10
+>>> d
+11
+>>> e
+2.718281828459045
+>>> import math
+>>> math.pi
+3.141592653589793
+>>> math.e
+2.718281828459045
+>>> from os import *
+>>> getcwd()
+'/Users/raymond/Dropbox/Public/sj134'
+>>> listdir('.')
+['#for_else4.c#', '.#for_else4.c', '.git', '.hg', 'adjectives.txt', 'algebra.py', 'api_design.txt', 'autodiff.py', 'autodiff.pyc', 'circuitous.html', 'circuitous.py', 'circuitous.pyc', 'class_skippers.txt', 'client.py', 'databases.txt', 'dayfour.log', 'dayone.log', 'daythree.log', 'daytwo.log', 'download.py', 'download.py~', 'else_goto.c', 'fibo.cover', 'for_else3.c', 'for_else4.c', 'links.txt', 'links.txt~', 'long_story.txt', 'longer_story.txt', 'pub', 'ready', 'swapping.txt', 'term.txt', 'terminology4.txt', 'terminology6.txt', 'tmp_tuple_packing.txt', 'upload.html']
+>>> open('notes/stocks.txt')
+
+Traceback (most recent call last):
+  File "<pyshell#596>", line 1, in <module>
+    open('notes/stocks.txt')
+TypeError: function takes at least 2 arguments (1 given)
+>>> f = open('notes/stocks.txt', 2)
+
+Traceback (most recent call last):
+  File "<pyshell#597>", line 1, in <module>
+    f = open('notes/stocks.txt', 2)
+OSError: [Errno 2] No such file or directory: 'notes/stocks.txt'
+t
+>>> f = open('notes/stocks.txt', 0)
+
+Traceback (most recent call last):
+  File "<pyshell#598>", line 1, in <module>
+    f = open('notes/stocks.txt', 0)
+OSError: [Errno 2] No such file or directory: 'notes/stocks.txt'
+>>> from os.path import *
+>>> f = open('dayone.log', 0)
+>>> type(f)
+<type 'int'>
+>>> del open
+>>> 
+>>> 
+>>> 
+>>> 

@@ -1,0 +1,15 @@
+'''
+
+len(s)               s.__len__()          lengthable          sizeable
+
+s[i]                 s.__getitem__()      bracketable         indexable
+
+for x in s:          s.__iter__()         forable             iterable
+
+with s:              s.__enter__()        withable            context manager
+                     s.__exit__()
+
+print s              sys.stdout.write(    printable           printable
+                       s.__str__() + '\n')
+
+'''

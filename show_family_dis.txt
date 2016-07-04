@@ -1,0 +1,37 @@
+  8           0 LOAD_CONST               1 ('The %s Family')
+              3 LOAD_FAST                0 (lastname)
+              6 LOAD_ATTR                0 (title)
+              9 CALL_FUNCTION            0
+             12 BINARY_MODULO       
+             13 PRINT_ITEM          
+             14 PRINT_NEWLINE       
+
+  9          15 LOAD_CONST               2 ('=')
+             18 LOAD_CONST               3 (11)
+             21 LOAD_GLOBAL              1 (len)
+             24 LOAD_FAST                0 (lastname)
+             27 CALL_FUNCTION            1
+             30 BINARY_ADD          
+             31 BINARY_MULTIPLY     
+             32 PRINT_ITEM          
+             33 PRINT_NEWLINE       
+
+ 10          34 SETUP_LOOP              29 (to 66)
+             37 LOAD_FAST                1 (first_names)
+             40 GET_ITER            
+        >>   41 FOR_ITER                21 (to 65)
+             44 STORE_FAST               2 (name)
+
+ 11          47 LOAD_CONST               4 ('* %s')
+             50 LOAD_FAST                2 (name)
+             53 LOAD_ATTR                0 (title)
+             56 CALL_FUNCTION            0
+             59 BINARY_MODULO       
+             60 PRINT_ITEM          
+             61 PRINT_NEWLINE       
+             62 JUMP_ABSOLUTE           41
+        >>   65 POP_BLOCK           
+
+ 12     >>   66 PRINT_NEWLINE       
+             67 LOAD_CONST               5 (None)
+             70 RETURN_VALUE        

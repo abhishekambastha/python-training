@@ -1,0 +1,3163 @@
+Python 2.7.11 (v2.7.11:6d1b6a68f775, Dec  5 2015, 12:54:16) 
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type "copyright", "credits" or "license()" for more information.
+>>> 
+
+>>> from itertools import *
+>>> c = count()
+>>> next(c)
+0
+>>> next(c)
+1
+>>> next(c)
+2
+>>> next(c)
+3
+>>> c = count(100, 10)
+>>> next(c)
+100
+>>> next(c)
+110
+>>> next(c)
+120
+>>> r = repeat('Hello')
+>>> next(r)
+'Hello'
+>>> next(r)
+'Hello'
+>>> next(r)
+'Hello'
+>>> next(r)
+'Hello'
+>>> 
+>>> r = repeat('Hello', 3)
+>>> next(r)
+'Hello'
+>>> next(r)
+'Hello'
+>>> next(r)
+'Hello'
+>>> next(r)
+
+Traceback (most recent call last):
+  File "<pyshell#21>", line 1, in <module>
+    next(r)
+StopIteration
+>>> 
+>>> 
+>>> 
+>>> 
+>>> x = 10
+>>> y = 20
+>>> 
+>>> t = x
+>>> x = y
+>>> y = t
+>>> 
+>>> x
+20
+>>> y
+10
+>>> 
+>>> x, y = y, x
+>>> 
+>>> 
+>>> zip('abcdef', range(10))
+[('a', 0), ('b', 1), ('c', 2), ('d', 3), ('e', 4), ('f', 5)]
+>>> it = izip('abcdef', range(10))
+>>> it
+<itertools.izip object at 0x103b9f128>
+>>> next(it)
+('a', 0)
+>>> next(it)
+('b', 1)
+>>> next(it)
+('c', 2)
+>>> 
+>>> 
+>>> it = enumerate('abc')
+>>> next(it)
+(0, 'a')
+>>> next(it)
+(1, 'b')
+>>> next(it)
+(2, 'c')
+>>> next(it)
+
+Traceback (most recent call last):
+  File "<pyshell#51>", line 1, in <module>
+    next(it)
+StopIteration
+>>> 
+>>> it = izip(count(), 'abc')
+>>> next(it)
+(0, 'a')
+>>> next(it)
+(1, 'b')
+>>> next(it)
+(2, 'c')
+>>> next(it)
+
+Traceback (most recent call last):
+  File "<pyshell#57>", line 1, in <module>
+    next(it)
+StopIteration
+>>> it = izip(count(100, 10), 'abc')
+>>> list(it)
+[(100, 'a'), (110, 'b'), (120, 'c')]
+>>> 
+>>> 
+>>> map(ord, 'Raymond')
+[82, 97, 121, 109, 111, 110, 100]
+>>> it = imap(ord, 'Raymond')
+>>> next(it)
+82
+>>> next(it)
+97
+>>> next(it)
+121
+>>> next(it)
+109
+>>> next(it)
+111
+>>> next(it)
+110
+>>> next(it)
+100
+>>> next(it)
+
+Traceback (most recent call last):
+  File "<pyshell#71>", line 1, in <module>
+    next(it)
+StopIteration
+>>> 
+>>> 
+>>> pow(2, 5)
+32
+>>> map(pow, [2] * 10, range(10))
+[1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+>>> [pow(2, 0), pow(2, 1)]
+[1, 2]
+>>> [2] * 10,
+([2, 2, 2, 2, 2, 2, 2, 2, 2, 2],)
+>>> [2] * 10
+[2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+>>> range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> 
+>>> 
+>>> it = imap(pow, repeat(2), xrange(10))
+>>> next(it)
+1
+>>> next(it)
+2
+>>> next(it)
+4
+>>> next(it)
+8
+>>> it = imap(pow, repeat(2, 10), count())
+>>> next(it)
+1
+>>> next(it)
+2
+>>> next(it)
+4
+>>> 
+>>> it = izip(repeat(2, 10), count())
+>>> next(it)
+(2, 0)
+>>> 
+>>> def f(a, b):
+	print a
+	print b
+
+	
+>>> t = (10, 20)
+>>> f(t)
+
+Traceback (most recent call last):
+  File "<pyshell#100>", line 1, in <module>
+    f(t)
+TypeError: f() takes exactly 2 arguments (1 given)
+>>> f(*t)
+10
+20
+>>> it = izip(repeat(2, 10), count())
+>>> it = starmap(pow, it)
+>>> next(it)
+1
+>>> next(it)
+2
+>>> next(it)
+4
+>>> 
+>>> 
+>>> 
+>>> names = 'raymond rachel matthew raymond'.split()
+>>> d = {'matthew': 'yellow', 'rachel': 'blue', 'raymond': 'red'}
+>>> d['matthew']
+'yellow'
+>>> d.__getitem__('matthew')
+'yellow'
+>>> 
+>>> map(d.__getitem__, names)
+['red', 'blue', 'yellow', 'red']
+>>> it = imap(d.__getitem__, names)
+>>> next(it)
+'red'
+>>> next(it)
+'blue'
+>>> 
+>>> 
+>>> it = chain('abc', range(5), [10, 20, 30])
+>>> list(it)
+['a', 'b', 'c', 0, 1, 2, 3, 4, 10, 20, 30]
+>>> 
+>>> 
+>>> 
+>>> # combinatorics:   product, combinations, permtuations, combination_with_replacement
+>>> 
+>>> names = 'raymond rachel matthew raymond'.split()
+>>> colors = 'red green blue'.split()
+>>> 
+>>> for name in names:
+	for color in colors:
+		print name, color
+
+		
+raymond red
+raymond green
+raymond blue
+rachel red
+rachel green
+rachel blue
+matthew red
+matthew green
+matthew blue
+raymond red
+raymond green
+raymond blue
+>>> for name in names:
+	for color in colors:
+		for i in range(3):
+			print name, color, i
+
+			
+raymond red 0
+raymond red 1
+raymond red 2
+raymond green 0
+raymond green 1
+raymond green 2
+raymond blue 0
+raymond blue 1
+raymond blue 2
+rachel red 0
+rachel red 1
+rachel red 2
+rachel green 0
+rachel green 1
+rachel green 2
+rachel blue 0
+rachel blue 1
+rachel blue 2
+matthew red 0
+matthew red 1
+matthew red 2
+matthew green 0
+matthew green 1
+matthew green 2
+matthew blue 0
+matthew blue 1
+matthew blue 2
+raymond red 0
+raymond red 1
+raymond red 2
+raymond green 0
+raymond green 1
+raymond green 2
+raymond blue 0
+raymond blue 1
+raymond blue 2
+>>> names = 'raymond rachel matthew raymond'.split()
+>>> colors = 'red green blue'.split()
+>>> from itertools import *
+>>> 
+>>> for name, color, i in product(names, colors, range(3)):
+	print name, color, i
+
+	
+raymond red 0
+raymond red 1
+raymond red 2
+raymond green 0
+raymond green 1
+raymond green 2
+raymond blue 0
+raymond blue 1
+raymond blue 2
+rachel red 0
+rachel red 1
+rachel red 2
+rachel green 0
+rachel green 1
+rachel green 2
+rachel blue 0
+rachel blue 1
+rachel blue 2
+matthew red 0
+matthew red 1
+matthew red 2
+matthew green 0
+matthew green 1
+matthew green 2
+matthew blue 0
+matthew blue 1
+matthew blue 2
+raymond red 0
+raymond red 1
+raymond red 2
+raymond green 0
+raymond green 1
+raymond green 2
+raymond blue 0
+raymond blue 1
+raymond blue 2
+>>> for r in starmap(pow, product(range(1, 5), range(1, 5))):
+	print r
+
+	
+1
+1
+1
+1
+2
+4
+8
+16
+3
+9
+27
+81
+4
+16
+64
+256
+>>> sum(starmap(pow, product(range(1, 5), range(1, 5))))
+494
+>>> 
+>>> list(product('abc', 'abc'))
+[('a', 'a'), ('a', 'b'), ('a', 'c'), ('b', 'a'), ('b', 'b'), ('b', 'c'), ('c', 'a'), ('c', 'b'), ('c', 'c')]
+>>> list(product('abc', repeat=2))
+[('a', 'a'), ('a', 'b'), ('a', 'c'), ('b', 'a'), ('b', 'b'), ('b', 'c'), ('c', 'a'), ('c', 'b'), ('c', 'c')]
+>>> for t in product(range(2), repeat=4):
+	print t
+
+	
+(0, 0, 0, 0)
+(0, 0, 0, 1)
+(0, 0, 1, 0)
+(0, 0, 1, 1)
+(0, 1, 0, 0)
+(0, 1, 0, 1)
+(0, 1, 1, 0)
+(0, 1, 1, 1)
+(1, 0, 0, 0)
+(1, 0, 0, 1)
+(1, 0, 1, 0)
+(1, 0, 1, 1)
+(1, 1, 0, 0)
+(1, 1, 0, 1)
+(1, 1, 1, 0)
+(1, 1, 1, 1)
+>>> for t in product(range(3), repeat=4):
+	print t
+
+	
+(0, 0, 0, 0)
+(0, 0, 0, 1)
+(0, 0, 0, 2)
+(0, 0, 1, 0)
+(0, 0, 1, 1)
+(0, 0, 1, 2)
+(0, 0, 2, 0)
+(0, 0, 2, 1)
+(0, 0, 2, 2)
+(0, 1, 0, 0)
+(0, 1, 0, 1)
+(0, 1, 0, 2)
+(0, 1, 1, 0)
+(0, 1, 1, 1)
+(0, 1, 1, 2)
+(0, 1, 2, 0)
+(0, 1, 2, 1)
+(0, 1, 2, 2)
+(0, 2, 0, 0)
+(0, 2, 0, 1)
+(0, 2, 0, 2)
+(0, 2, 1, 0)
+(0, 2, 1, 1)
+(0, 2, 1, 2)
+(0, 2, 2, 0)
+(0, 2, 2, 1)
+(0, 2, 2, 2)
+(1, 0, 0, 0)
+(1, 0, 0, 1)
+(1, 0, 0, 2)
+(1, 0, 1, 0)
+(1, 0, 1, 1)
+(1, 0, 1, 2)
+(1, 0, 2, 0)
+(1, 0, 2, 1)
+(1, 0, 2, 2)
+(1, 1, 0, 0)
+(1, 1, 0, 1)
+(1, 1, 0, 2)
+(1, 1, 1, 0)
+(1, 1, 1, 1)
+(1, 1, 1, 2)
+(1, 1, 2, 0)
+(1, 1, 2, 1)
+(1, 1, 2, 2)
+(1, 2, 0, 0)
+(1, 2, 0, 1)
+(1, 2, 0, 2)
+(1, 2, 1, 0)
+(1, 2, 1, 1)
+(1, 2, 1, 2)
+(1, 2, 2, 0)
+(1, 2, 2, 1)
+(1, 2, 2, 2)
+(2, 0, 0, 0)
+(2, 0, 0, 1)
+(2, 0, 0, 2)
+(2, 0, 1, 0)
+(2, 0, 1, 1)
+(2, 0, 1, 2)
+(2, 0, 2, 0)
+(2, 0, 2, 1)
+(2, 0, 2, 2)
+(2, 1, 0, 0)
+(2, 1, 0, 1)
+(2, 1, 0, 2)
+(2, 1, 1, 0)
+(2, 1, 1, 1)
+(2, 1, 1, 2)
+(2, 1, 2, 0)
+(2, 1, 2, 1)
+(2, 1, 2, 2)
+(2, 2, 0, 0)
+(2, 2, 0, 1)
+(2, 2, 0, 2)
+(2, 2, 1, 0)
+(2, 2, 1, 1)
+(2, 2, 1, 2)
+(2, 2, 2, 0)
+(2, 2, 2, 1)
+(2, 2, 2, 2)
+>>> for t in product(range(10), repeat=3):
+	print t
+
+	
+(0, 0, 0)
+(0, 0, 1)
+(0, 0, 2)
+(0, 0, 3)
+(0, 0, 4)
+(0, 0, 5)
+(0, 0, 6)
+(0, 0, 7)
+(0, 0, 8)
+(0, 0, 9)
+(0, 1, 0)
+(0, 1, 1)
+(0, 1, 2)
+(0, 1, 3)
+(0, 1, 4)
+(0, 1, 5)
+(0, 1, 6)
+(0, 1, 7)
+(0, 1, 8)
+(0, 1, 9)
+(0, 2, 0)
+(0, 2, 1)
+(0, 2, 2)
+(0, 2, 3)
+(0, 2, 4)
+(0, 2, 5)
+(0, 2, 6)
+Traceback (most recent call last):
+  File "<pyshell#157>", line 2, in <module>
+    print t
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/idlelib/PyShell.py", line 1356, in write
+    return self.shell.write(s, self.tags)
+KeyboardInterrupt
+>>> 
+>>> 
+>>> for t in permutations('love'):
+	print ''.join(t)
+
+	
+love
+loev
+lvoe
+lveo
+leov
+levo
+olve
+olev
+ovle
+ovel
+oelv
+oevl
+vloe
+vleo
+vole
+voel
+velo
+veol
+elov
+elvo
+eolv
+eovl
+evlo
+evol
+>>> for t in permutations('love', 2):
+	print ''.join(t)
+
+	
+lo
+lv
+le
+ol
+ov
+oe
+vl
+vo
+ve
+el
+eo
+ev
+>>> for t in combinations('love'):
+	print ''.join(t)
+
+	
+
+Traceback (most recent call last):
+  File "<pyshell#166>", line 1, in <module>
+    for t in combinations('love'):
+TypeError: Required argument 'r' (pos 2) not found
+>>> for t in combinations('love', 4):
+	print ''.join(t)
+
+	
+love
+>>> for t in combinations('love', 3):
+	print ''.join(t)
+
+	
+lov
+loe
+lve
+ove
+>>> for t in combinations('love', 2):
+	print ''.join(t)
+
+	
+lo
+lv
+le
+ov
+oe
+ve
+>>> 
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> p
+<__main__.PriceRange object at 0x103a3aa90>
+>>> p.low
+20
+>>> p.high
+29
+>>> p.midpoint
+24
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> p.midpoint
+24.5
+>>> p
+<__main__.PriceRange object at 0x10423aa90>
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> p
+PriceRange('CSCO', 20, 29)
+>>> p.midpoint
+24.5
+>>> 
+>>> 
+>>> p.__class__
+<class '__main__.PriceRange'>
+>>> p.__dict__
+{'high': 29, 'symbol': 'CSCO', 'midpoint': 24.5, 'low': 20}
+>>> len(_)
+4
+>>> # space problem
+>>> 
+>>> p.low = 24
+>>> p.high
+29
+>>> p.midpoint
+24.5
+>>> # data is inconsistent
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> 
+>>> 
+>>> p.__dict__
+{'high': 29, 'symbol': 'CSCO', 'low': 20}
+>>> len(_)
+3
+>>> p.midpoint()
+24.5
+>>> p.low = 24
+>>> p.midpoint()
+26.5
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> 
+>>> 
+>>> p.symbol
+'CSCO'
+>>> p.low
+20
+>>> p.high
+29
+>>> p.midpoint()
+24.5
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> 
+>>> p
+PriceRange('CSCO', 20, 29)
+>>> p.symbol
+'CSCO'
+>>> p.low
+20
+>>> p.high
+29
+>>> p.midpoint
+24.5
+>>> p.low = 24
+>>> p.midpoint
+26.5
+>>> p.__dict__
+{'high': 29, 'symbol': 'CSCO', 'low': 24}
+>>> 
+>>> p.low = 'hello'
+>>> 
+
+
+>>> 
+
+
+
+
+
+
+
+
+
+>>> 
+
+
+>>> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>> 
+
+>>> p.high
+29
+>>> p . high
+29
+>>> # 1) The attribute lookup is successful
+>>> #    and returns the associated value
+>>> # 2) The attribute lookup is unsuccessful
+>>> #    and raises AttributeError
+>>> 
+>>> p.xyz
+
+Traceback (most recent call last):
+  File "<pyshell#229>", line 1, in <module>
+    p.xyz
+AttributeError: 'PriceRange' object has no attribute 'xyz'
+>>> 
+>>> 
+>>> 
+>>> p.midpoint
+
+Traceback (most recent call last):
+  File "<pyshell#233>", line 1, in <module>
+    p.midpoint
+  File "/Users/raymond/Dropbox/Public/sj134/property_demo.py", line 20, in midpoint
+TypeError: cannot concatenate 'str' and 'int' objects
+>>> 
+>>> 
+>>> 
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> p.low
+20
+>>> p.high
+29
+>>> p.midpoint
+24.5
+>>> p
+PriceRange('CSCO', 20, 29)
+>>> p.symbol
+'CSCO'
+>>> p.__dict__
+{'high': 29, 'symbol': 'CSCO', '_low': 20}
+>>> p.low = 24
+>>> p.__dict__
+{'high': 29, 'symbol': 'CSCO', '_low': 24}
+>>> p.low
+24
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> p.low
+20
+>>> p.high
+29
+>>> p.midpoint
+24.5
+>>> p
+PriceRange('CSCO', 20, 29)
+>>> p.symbol
+'CSCO'
+>>> p.__dict__
+{'high': 29, 'symbol': 'CSCO', '_low': 20}
+>>> p.low = 24
+>>> p.low
+24
+>>> p.midpoint
+26.5
+>>> p.__dict__
+{'high': 29, 'symbol': 'CSCO', '_low': 24}
+>>> 
+>>> 
+>>> 
+>>> p.low = 'hello'
+
+Traceback (most recent call last):
+  File "<pyshell#259>", line 1, in <module>
+    p.low = 'hello'
+  File "/Users/raymond/Dropbox/Public/sj134/property_demo.py", line 38, in set_low
+    raise TypeError('Expected int or float')
+TypeError: Expected int or float
+>>> 
+>>> 
+>>> 
+>>> p.high = 'goodbye'
+>>> 
+>>> 
+>>> 
+
+
+
+
+
+
+
+
+>>> 
+
+
+>>> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>> 
+
+
+>>> 
+>>> p.midpoint
+
+Traceback (most recent call last):
+  File "<pyshell#271>", line 1, in <module>
+    p.midpoint
+  File "/Users/raymond/Dropbox/Public/sj134/property_demo.py", line 27, in midpoint
+    def __init__(self, symbol, low, high):
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> p.low < -5
+False
+>>> p.high = 150
+
+Traceback (most recent call last):
+  File "<pyshell#273>", line 1, in <module>
+    p.high = 150
+  File "/Users/raymond/Dropbox/Public/sj134/property_demo.py", line 58, in set_high
+    raise ValueError('Expected 0 to 100')
+ValueError: Expected 0 to 100
+>>> p.high = 'goodbye'
+
+Traceback (most recent call last):
+  File "<pyshell#274>", line 1, in <module>
+    p.high = 'goodbye'
+  File "/Users/raymond/Dropbox/Public/sj134/property_demo.py", line 56, in set_high
+    raise TypeError('Expected int or float')
+TypeError: Expected int or float
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/property_demo.py", line 23, in <module>
+    from validators import validate_percentage
+  File "/Users/raymond/Dropbox/Public/sj134/validators.py", line 3
+    def validate_percentage(value)
+                                 ^
+SyntaxError: invalid syntax
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> 
+>>> 
+>>> 
+>>> 
+>>> x = 10
+>>> y = x + 1
+>>> 
+>>> y
+11
+>>> y = 11
+>>> 
+>>> 
+>>> x = 10
+>>> x = x
+>>> x
+10
+>>> 
+>>> x = 10
+>>> 
+>>> 
+>>> x = x
+>>> 
+>>> 
+>>> def f(x):
+	return x
+
+>>> f(5)
+5
+>>> f('hello')
+'hello'
+>>> 
+>>> 
+>>> def square(x):
+	return x * x
+
+>>> square
+<function square at 0x10393f140>
+>>> f = square
+>>> f(5)
+25
+>>> square = square
+>>> square(5)
+25
+>>> 
+>>> 
+>>> def f(x):
+	return x
+
+>>> square = f(square)
+>>> square(5)
+25
+>>> 
+>>> bin = f(bin)
+>>> bin(51)
+'0b110011'
+>>> hex(51)
+'0x33'
+>>> 
+>>> 
+>>> f(5)
+5
+>>> def f(x):
+	print x.__name__
+	return x
+
+>>> square = f(square)
+square
+>>> 
+>>> 
+>>> @f
+def square(x):
+	return x * x
+
+square
+>>> square(5)
+25
+>>> help(property)
+Help on class property in module __builtin__:
+
+class property(object)
+ |  property(fget=None, fset=None, fdel=None, doc=None) -> property attribute
+ |  
+ |  fget is a function to be used for getting an attribute value, and likewise
+ |  fset is a function for setting, and fdel a function for del'ing, an
+ |  attribute.  Typical use is to define a managed attribute x:
+ |  
+ |  class C(object):
+ |      def getx(self): return self._x
+ |      def setx(self, value): self._x = value
+ |      def delx(self): del self._x
+ |      x = property(getx, setx, delx, "I'm the 'x' property.")
+ |  
+ |  Decorators make defining new properties or modifying existing ones easy:
+ |  
+ |  class C(object):
+ |      @property
+ |      def x(self):
+ |          "I am the 'x' property."
+ |          return self._x
+ |      @x.setter
+ |      def x(self, value):
+ |          self._x = value
+ |      @x.deleter
+ |      def x(self):
+ |          del self._x
+ |  
+ |  Methods defined here:
+ |  
+ |  __delete__(...)
+ |      descr.__delete__(obj)
+ |  
+ |  __get__(...)
+ |      descr.__get__(obj[, type]) -> value
+ |  
+ |  __getattribute__(...)
+ |      x.__getattribute__('name') <==> x.name
+ |  
+ |  __init__(...)
+ |      x.__init__(...) initializes x; see help(type(x)) for signature
+ |  
+ |  __set__(...)
+ |      descr.__set__(obj, value)
+ |  
+ |  deleter(...)
+ |      Descriptor to change the deleter on a property.
+ |  
+ |  getter(...)
+ |      Descriptor to change the getter on a property.
+ |  
+ |  setter(...)
+ |      Descriptor to change the setter on a property.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  fdel
+ |  
+ |  fget
+ |  
+ |  fset
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  __new__ = <built-in method __new__ of type object>
+ |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> p = Price('GOOG', 500, 600)
+
+Traceback (most recent call last):
+  File "<pyshell#335>", line 1, in <module>
+    p = Price('GOOG', 500, 600)
+NameError: name 'Price' is not defined
+>>> p = PriceRange('GOOG', 500, 600)
+
+Traceback (most recent call last):
+  File "<pyshell#336>", line 1, in <module>
+    p = PriceRange('GOOG', 500, 600)
+  File "/Users/raymond/Dropbox/Public/sj134/property_demo.py", line 40, in __init__
+    self.high = high
+  File "/Users/raymond/Dropbox/Public/sj134/property_demo.py", line 63, in high
+    validate_percentage(high)
+  File "/Users/raymond/Dropbox/Public/sj134/validators.py", line 7, in validate_percentage
+    raise ValueError('Expected 0 to 100')
+ValueError: Expected 0 to 100
+>>> p = PriceRange('GOOG', 50, 60)
+>>> p.__dict__
+{'symbol': 'GOOG', '_high': 60}
+>>> p.midpoint
+
+Traceback (most recent call last):
+  File "<pyshell#339>", line 1, in <module>
+    p.midpoint
+  File "/Users/raymond/Dropbox/Public/sj134/property_demo.py", line 44, in midpoint
+    return (self.low + self.high) / 2
+  File "/Users/raymond/Dropbox/Public/sj134/property_demo.py", line 50, in low
+    return self._low
+AttributeError: 'PriceRange' object has no attribute '_low'
+>>> p.low = 40
+>>> p.midpoint
+50.0
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/property_demo.py", line 69, in <module>
+    p = PriceRange('CSCO', 20, 29)
+TypeError: object() takes no parameters
+>>> 
+>>> 
+>>> 
+>>> p = PriceRange()
+>>> p.symbol = 'WLP'
+>>> p.low = 10
+>>> p.high = 15
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/property_demo.py =======
+>>> 
+>>> 
+>>> s = 'hello'
+>>> len(s)
+5
+>>> s.__len__()
+5
+>>> len = None
+>>> def mylen(obj):
+	return obj.__len__()
+
+>>> mylen('hello')
+5
+>>> mylen([10, 20, 30])
+3
+>>> 
+>>> 
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/with_demo.py =========
+202238
+202238
+Critical section 1
+Critical section 2
+Critical section 1
+Critical section 2
+>>> dir(f)
+['__class__', '__delattr__', '__doc__', '__enter__', '__exit__', '__format__', '__getattribute__', '__hash__', '__init__', '__iter__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'close', 'closed', 'encoding', 'errors', 'fileno', 'flush', 'isatty', 'mode', 'name', 'newlines', 'next', 'read', 'readinto', 'readline', 'readlines', 'seek', 'softspace', 'tell', 'truncate', 'write', 'writelines', 'xreadlines']
+>>> 
+>>> 
+>>> dir(printer_lock)
+['__class__', '__delattr__', '__doc__', '__enter__', '__exit__', '__format__', '__getattribute__', '__hash__', '__init__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'acquire', 'acquire_lock', 'locked', 'locked_lock', 'release', 'release_lock']
+>>> 
+>>> 
+>>> e = KeyError('bill')
+>>> e.args
+('bill',)
+>>> 
+>>> 
+>>> class MissingTitle(KeyError):
+	pass
+
+>>> try:
+	raise MissingTitle('Tale of Two Cities')
+except MissingTitle:
+	print 'Caught the exception'
+
+	
+Caught the exception
+>>> try:
+	raise MissingTitle('Tale of Two Cities')
+except KeyError:
+	print 'Caught the exception'
+
+	
+Caught the exception
+>>> try:
+	raise MissingTitle('Tale of Two Cities')
+except LookupError:
+	print 'Caught the exception'
+
+	
+Caught the exception
+>>> try:
+	raise MissingTitle('Tale of Two Cities')
+except Exception:
+	print 'Caught the exception'
+
+	
+Caught the exception
+>>> try:
+	raise MissingTitle('Tale of Two Cities')
+except BaseException:
+	print 'Caught the exception'
+
+	
+Caught the exception
+>>> 
+>>> try:
+	raise MissingTitle('Tale of Two Cities')
+except Exception:
+	print 'Caught the exception'
+
+	
+Caught the exception
+>>> try:
+	raise MissinTitle('Tale of Two Cities')
+except Exception:
+	print 'Caught the exception'
+
+	
+Caught the exception
+>>> try:
+	raise MissinTitle('Tale of Two Cities')
+except KeyError:
+	print 'Caught the exception'
+
+	
+
+Traceback (most recent call last):
+  File "<pyshell#394>", line 2, in <module>
+    raise MissinTitle('Tale of Two Cities')
+NameError: name 'MissinTitle' is not defined
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/with_demo.py =========
+202238
+202238
+Critical section 1
+Critical section 2
+Critical section 1
+Critical section 2
+Starting up
+Initializing with 100
+Entering the CM and returning 42
+In the body with y: 42
+In the middle
+At the end
+Exiting the CM
+Exctype: None
+Finishing up
+====================
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/with_demo.py =========
+202238
+202238
+Critical section 1
+Critical section 2
+Critical section 1
+Critical section 2
+Starting up
+Initializing with 100
+Entering the CM and returning 42
+In the body with y: 42
+In the middle
+At the end
+Exiting the CM
+Exctype: None
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/with_demo.py", line 69, in <module>
+    print 'At the end'
+  File "/Users/raymond/Dropbox/Public/sj134/with_demo.py", line 56, in __exit__
+    if issubclass(exctype, KeyError):
+TypeError: issubclass() arg 1 must be a class
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/with_demo.py =========
+202238
+202238
+Critical section 1
+Critical section 2
+Critical section 1
+Critical section 2
+Starting up
+Initializing with 100
+Entering the CM and returning 42
+In the body with y: 42
+In the middle
+At the end
+Exiting the CM
+Exctype: None
+Returning None which is False
+Finishing up
+====================
+Starting up
+Initializing with 100
+Entering the CM and returning 42
+In the body with y: 42
+In the middle
+Exiting the CM
+Exctype: <type 'exceptions.KeyError'>
+Caught a KeyError
+The args are: ('bill',)
+Marking as handled
+Finishing up
+====================
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/with_demo.py =========
+202238
+202238
+Critical section 1
+Critical section 2
+Critical section 1
+Critical section 2
+Starting up
+Initializing with 100
+Entering the CM and returning 42
+In the body with y: 42
+In the middle
+At the end
+Exiting the CM
+Exctype: None
+Returning None which is False
+Finishing up
+====================
+Starting up
+Initializing with 100
+Entering the CM and returning 42
+In the body with y: 42
+In the middle
+Exiting the CM
+Exctype: <type 'exceptions.KeyError'>
+Caught a KeyError
+The args are: ('bill',)
+Marking as handled
+Finishing up
+====================
+Starting up
+Initializing with 100
+Entering the CM and returning 42
+In the body with y: 42
+In the middle
+Exiting the CM
+Exctype: <type 'exceptions.IndexError'>
+Returning None which is False
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/with_demo.py", line 90, in <module>
+    raise IndexError(10)
+IndexError: 10
+>>> 
+========= RESTART: /Users/raymond/Dropbox/Public/sj134/with_demo.py =========
+202238
+202238
+Critical section 1
+Critical section 2
+Critical section 1
+Critical section 2
+Starting up
+Initializing with 100
+Entering the CM and returning 42
+In the body with y: 42
+In the middle
+At the end
+Exiting the CM
+Exctype: None
+Returning None which is False
+Finishing up
+====================
+Starting up
+Initializing with 100
+Entering the CM and returning 42
+In the body with y: 42
+In the middle
+Exiting the CM
+Exctype: <type 'exceptions.KeyError'>
+Caught a KeyError
+The args are: ('bill',)
+Marking as handled
+Finishing up
+====================
+Starting up
+Initializing with 100
+Entering the CM and returning 42
+In the body with y: 42
+In the middle
+Exiting the CM
+Exctype: <type 'exceptions.IndexError'>
+Returning None which is False
+Caught the IndexError
+Finishing up
+====================
+>>> f = open('notes/hamlet.txt')
+>>> f
+<open file 'notes/hamlet.txt', mode 'r' at 0x103877d20>
+>>> dir(r)
+
+Traceback (most recent call last):
+  File "<pyshell#397>", line 1, in <module>
+    dir(r)
+NameError: name 'r' is not defined
+>>> dir(f)
+['__class__', '__delattr__', '__doc__', '__enter__', '__exit__', '__format__', '__getattribute__', '__hash__', '__init__', '__iter__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'close', 'closed', 'encoding', 'errors', 'fileno', 'flush', 'isatty', 'mode', 'name', 'newlines', 'next', 'read', 'readinto', 'readline', 'readlines', 'seek', 'softspace', 'tell', 'truncate', 'write', 'writelines', 'xreadlines']
+>>> play = f.read()
+>>> f.close()
+>>> f
+<closed file 'notes/hamlet.txt', mode 'r' at 0x103877d20>
+>>> play = f.read()
+
+Traceback (most recent call last):
+  File "<pyshell#402>", line 1, in <module>
+    play = f.read()
+ValueError: I/O operation on closed file
+>>> f
+<closed file 'notes/hamlet.txt', mode 'r' at 0x103877d20>
+>>> type(f)
+<type 'file'>
+>>> help(file)
+Help on class file in module __builtin__:
+
+class file(object)
+ |  file(name[, mode[, buffering]]) -> file object
+ |  
+ |  Open a file.  The mode can be 'r', 'w' or 'a' for reading (default),
+ |  writing or appending.  The file will be created if it doesn't exist
+ |  when opened for writing or appending; it will be truncated when
+ |  opened for writing.  Add a 'b' to the mode for binary files.
+ |  Add a '+' to the mode to allow simultaneous reading and writing.
+ |  If the buffering argument is given, 0 means unbuffered, 1 means line
+ |  buffered, and larger numbers specify the buffer size.  The preferred way
+ |  to open a file is with the builtin open() function.
+ |  Add a 'U' to mode to open the file for input with universal newline
+ |  support.  Any line ending in the input file will be seen as a '\n'
+ |  in Python.  Also, a file so opened gains the attribute 'newlines';
+ |  the value for this attribute is one of None (no newline read yet),
+ |  '\r', '\n', '\r\n' or a tuple containing all the newline types seen.
+ |  
+ |  'U' cannot be combined with 'w' or '+' mode.
+ |  
+ |  Methods defined here:
+ |  
+ |  __delattr__(...)
+ |      x.__delattr__('name') <==> del x.name
+ |  
+ |  __enter__(...)
+ |      __enter__() -> self.
+ |  
+ |  __exit__(...)
+ |      __exit__(*excinfo) -> None.  Closes the file.
+ |  
+ |  __getattribute__(...)
+ |      x.__getattribute__('name') <==> x.name
+ |  
+ |  __init__(...)
+ |      x.__init__(...) initializes x; see help(type(x)) for signature
+ |  
+ |  __iter__(...)
+ |      x.__iter__() <==> iter(x)
+ |  
+ |  __repr__(...)
+ |      x.__repr__() <==> repr(x)
+ |  
+ |  __setattr__(...)
+ |      x.__setattr__('name', value) <==> x.name = value
+ |  
+ |  close(...)
+ |      close() -> None or (perhaps) an integer.  Close the file.
+ |      
+ |      Sets data attribute .closed to True.  A closed file cannot be used for
+ |      further I/O operations.  close() may be called more than once without
+ |      error.  Some kinds of file objects (for example, opened by popen())
+ |      may return an exit status upon closing.
+ |  
+ |  fileno(...)
+ |      fileno() -> integer "file descriptor".
+ |      
+ |      This is needed for lower-level file interfaces, such os.read().
+ |  
+ |  flush(...)
+ |      flush() -> None.  Flush the internal I/O buffer.
+ |  
+ |  isatty(...)
+ |      isatty() -> true or false.  True if the file is connected to a tty device.
+ |  
+ |  next(...)
+ |      x.next() -> the next value, or raise StopIteration
+ |  
+ |  read(...)
+ |      read([size]) -> read at most size bytes, returned as a string.
+ |      
+ |      If the size argument is negative or omitted, read until EOF is reached.
+ |      Notice that when in non-blocking mode, less data than what was requested
+ |      may be returned, even if no size parameter was given.
+ |  
+ |  readinto(...)
+ |      readinto() -> Undocumented.  Don't use this; it may go away.
+ |  
+ |  readline(...)
+ |      readline([size]) -> next line from the file, as a string.
+ |      
+ |      Retain newline.  A non-negative size argument limits the maximum
+ |      number of bytes to return (an incomplete line may be returned then).
+ |      Return an empty string at EOF.
+ |  
+ |  readlines(...)
+ |      readlines([size]) -> list of strings, each a line from the file.
+ |      
+ |      Call readline() repeatedly and return a list of the lines so read.
+ |      The optional size argument, if given, is an approximate bound on the
+ |      total number of bytes in the lines returned.
+ |  
+ |  seek(...)
+ |      seek(offset[, whence]) -> None.  Move to new file position.
+ |      
+ |      Argument offset is a byte count.  Optional argument whence defaults to
+ |      0 (offset from start of file, offset should be >= 0); other values are 1
+ |      (move relative to current position, positive or negative), and 2 (move
+ |      relative to end of file, usually negative, although many platforms allow
+ |      seeking beyond the end of a file).  If the file is opened in text mode,
+ |      only offsets returned by tell() are legal.  Use of other offsets causes
+ |      undefined behavior.
+ |      Note that not all file objects are seekable.
+ |  
+ |  tell(...)
+ |      tell() -> current file position, an integer (may be a long integer).
+ |  
+ |  truncate(...)
+ |      truncate([size]) -> None.  Truncate the file to at most size bytes.
+ |      
+ |      Size defaults to the current file position, as returned by tell().
+ |  
+ |  write(...)
+ |      write(str) -> None.  Write string str to file.
+ |      
+ |      Note that due to buffering, flush() or close() may be needed before
+ |      the file on disk reflects the data written.
+ |  
+ |  writelines(...)
+ |      writelines(sequence_of_strings) -> None.  Write the strings to the file.
+ |      
+ |      Note that newlines are not added.  The sequence can be any iterable object
+ |      producing strings. This is equivalent to calling write() for each string.
+ |  
+ |  xreadlines(...)
+ |      xreadlines() -> returns self.
+ |      
+ |      For backward compatibility. File objects now include the performance
+ |      optimizations previously implemented in the xreadlines module.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  closed
+ |      True if the file is closed
+ |  
+ |  encoding
+ |      file encoding
+ |  
+ |  errors
+ |      Unicode error handler
+ |  
+ |  mode
+ |      file mode ('r', 'U', 'w', 'a', possibly with 'b' or '+' added)
+ |  
+ |  name
+ |      file name
+ |  
+ |  newlines
+ |      end-of-line convention used in this file
+ |  
+ |  softspace
+ |      flag indicating that a space needs to be printed; used by print
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  __new__ = <built-in method __new__ of type object>
+ |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+
+>>> f = open('notes/hamlet.txt')
+>>> dir(f)
+['__class__', '__delattr__', '__doc__', '__enter__', '__exit__', '__format__', '__getattribute__', '__hash__', '__init__', '__iter__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'close', 'closed', 'encoding', 'errors', 'fileno', 'flush', 'isatty', 'mode', 'name', 'newlines', 'next', 'read', 'readinto', 'readline', 'readlines', 'seek', 'softspace', 'tell', 'truncate', 'write', 'writelines', 'xreadlines']
+>>> f.fileno
+<built-in method fileno of file object at 0x1038f89c0>
+>>> f.fileno()
+10
+>>> # 1:45
+>>> #######################################################
+>>> # 1) Read code (standard library --> collections)
+>>> # 2) Focus on the core skill
+>>> #       Code Complete
+>>> #       The Practice of Progamming -- Pike
+>>> #       Programming Pearls (two volumes) -- Bentley
+>>> # 3) https://projecteuler.net/
+>>> # 4) Take my examples and extend them.
+>>> #        Benford's Law
+>>> 
+>>> # 5) Join an open source project
+>>> 
+>>> 
+>>> # https://news.ycombinator.com/
+>>> 
+>>> def square(x):
+	'Return a value times itself'
+	return x * x
+
+>>> square.__class__
+<type 'function'>
+>>> square.__name__
+'square'
+>>> f = square
+>>> f.__name__
+'square'
+>>> f.__name__ = 'pointy_circle'
+>>> help(square)
+Help on function pointy_circle in module __main__:
+
+pointy_circle(x)
+    Return a value times itself
+
+>>> square.__doc__
+'Return a value times itself'
+>>> square.__code__.co_code
+'|\x00\x00|\x00\x00\x14S'
+>>> map(ord, square.__code__.co_code)
+[124, 0, 0, 124, 0, 0, 20, 83]
+>>> from dis import dis
+>>> dis(square)
+  3           0 LOAD_FAST                0 (x)
+              3 LOAD_FAST                0 (x)
+              6 BINARY_MULTIPLY     
+              7 RETURN_VALUE        
+>>> 
+>>> square.__call__(5)
+25
+>>> square.__doc__ = 'Smush a circle until it fills a box'
+>>> help(square)
+Help on function pointy_circle in module __main__:
+
+pointy_circle(x)
+    Smush a circle until it fills a box
+
+>>> # __call__ -> creates a stack frame (1. a dict called locals, 2. code pointer, 3. try/except)
+>>> #          -> running the op codes in __code__ which update the stack frame
+>>> 
+>>> 
+>>> x = 10
+>>> def f(x):
+	print locals()
+	return x * x
+
+>>> globals()['x']
+10
+>>> f(5)
+{'x': 5}
+25
+>>> globals()['x']
+10
+>>> def f(x):
+	print locals()
+	y = x + 1
+	return x * y
+
+>>> f(5)
+{'x': 5}
+30
+>>> def f(x):
+	y = x + 1
+	print locals()
+	return x * y
+
+>>> f(5)
+{'y': 6, 'x': 5}
+30
+>>> def f(x):
+	global y
+	y = x + 1
+	print locals()
+	return x * y
+
+>>> f(5)
+{'x': 5}
+30
+>>> globals()['y']
+6
+>>> f(10)
+{'x': 10}
+110
+>>> y
+11
+>>> len('hello')
+5
+>>> __builtins__.len('hello')
+5
+>>> # locals() -> globals() -> __builtins__ -> NameError
+>>> 
+>>> def f(x):
+	global y
+	y = x + 1
+	print locals()
+	return x * y * len('hello')
+
+>>> def f(x):
+	global y
+	y = x + 1
+	print locals()
+	return x * y * len('hello') + z
+
+>>> z = 100
+>>> f(1)
+{'x': 1}
+110
+>>> y
+2
+>>> x
+10
+>>> xyz
+
+Traceback (most recent call last):
+  File "<pyshell#481>", line 1, in <module>
+    xyz
+NameError: name 'xyz' is not defined
+>>> # locals() -> globals() -> __builtins__ -> NameError
+>>> 
+>>> def len(obj):
+	return 42
+
+>>> len('hello')
+42
+>>> __builtins__.len('hello')
+5
+>>> f(1)
+{'x': 1}
+184
+>>> del len
+>>> f(1)
+{'x': 1}
+110
+>>> 
+>>> # locals() -> globals() -> __builtins__ -> NameError
+>>> 
+>>> 
+>>> 
+=============================== RESTART: Shell ===============================
+>>> x = 10
+>>> sorted(globals().keys())
+['__builtins__', '__doc__', '__name__', '__package__', 'x']
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'x']
+>>> dir = None
+>>> def mydir():
+	return sorted(globals().keys())
+
+>>> mydir()
+['__builtins__', '__doc__', '__name__', '__package__', 'dir', 'mydir', 'x']
+>>> del dir
+>>> 
+>>> import math
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'math', 'mydir', 'x']
+>>> # At the module level, globals and locals are the same dictionary
+>>> 
+>>> 
+>>> 
+>>> x =12
+>>> globals()['x']
+12
+>>> locals()['x']
+12
+>>> def square(x):
+	'Return a value times itself'
+	return x * x
+
+>>> locals()['square']
+<function square at 0x1006ef500>
+>>> locals()['square'](6)
+36
+>>> class Computer:
+	pass
+
+>>> dir()
+['Computer', '__builtins__', '__doc__', '__name__', '__package__', 'math', 'mydir', 'square', 'x']
+>>> locals()['Computer']
+<class __main__.Computer at 0x10061e328>
+>>> locals()['Computer']()
+<__main__.Computer instance at 0x104a9f098>
+>>> 
+>>> # = def import class
+>>> 
+>>> 
+=============================== RESTART: Shell ===============================
+>>> def f(x):
+	y = x + 1
+	import math
+	def g(z):
+		pass
+	class Person:
+		pass
+	print locals()
+
+	
+>>> f(1)
+{'y': 2, 'Person': <class __main__.Person at 0x1043327a0>, 'math': <module 'math' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/math.so'>, 'g': <function g at 0x1006ef500>, 'x': 1}
+>>> 
+>>> 
+>>> def f():
+	def g(z):
+		return z ** 2
+	print g(5)
+
+	
+>>> f()
+25
+>>> def f():
+	def g(z):
+		return z ** 2
+	print locals()
+	print g(5)
+
+	
+>>> f()
+{'g': <function g at 0x1006ef500>}
+25
+>>> def f():
+	def g(z):
+		print 'G locals:', locals()
+		return z ** 2
+	print 'F locals:', locals()
+	print g(5)
+
+	
+>>> f()
+F locals: {'g': <function g at 0x1006ef488>}
+G locals: {'z': 5}
+25
+>>> def f(x):
+	def g(z):
+		print 'G locals:', locals()
+		return x + z ** 2
+	print 'F locals:', locals()
+	print g(5)
+
+	
+>>> f(1)
+F locals: {'x': 1, 'g': <function g at 0x1006ef500>}
+G locals: {'x': 1, 'z': 5}
+26
+>>> def f(x):
+	def g(z):
+		print x, y, z
+		return x + y + z
+	print g(5)
+
+	
+>>> y = 100
+>>> f(1)
+1 100 5
+106
+>>> # locals() -> nested scope -> globals() -> __builtins__ -> NameError
+>>> x = 1000
+>>> f(1)
+1 100 5
+106
+>>> 
+=============================== RESTART: Shell ===============================
+>>> def f(y):
+	def g(x):
+		print x, y, z
+		return x + y + z
+	print g
+
+	
+>>> f.__name__
+'f'
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'f']
+>>> 
+>>> z = 100
+>>> h = f(1)
+<function g at 0x1006ef500>
+>>> # RDH!
+>>> 
+>>> h
+>>> h
+>>> def f(y):
+	def g(x):
+		print x, y, z
+		return x + y + z
+	return g
+
+>>> h = f(1)
+>>> h
+<function g at 0x1006ef488>
+>>> h.__name__
+'g'
+>>> h(10)
+10 1 100
+111
+>>> 
+>>> h.__name__
+'g'
+>>> h.__code__
+<code object g at 0x1040080b0, file "<pyshell#574>", line 2>
+>>> h.__closure__
+(<cell at 0x1040223d0: int object at 0x10030c218>,)
+>>> h.__closure__[0]
+<cell at 0x1040223d0: int object at 0x10030c218>
+>>> h.__closure__[0].cell_contents
+1
+>>> # The purpose of a def in a def is for the outer function
+>>> # to manufacture many copies of the inner function
+>>> # Those copies all have the same name, same code, same docstring
+>>> # but differ in their closure variables.
+>>> 
+>>> 
+>>> 2 + 2 + 2 + 2 + 2
+10
+>>> a = 2 + 2 + 2 + 2 + 2
+>>> b = 2 + 2 + 2 + 2 + 2 + 2
+>>> c = 2 + 2 + 2 + 2 + 2 + 2 + 2
+>>> 
+>>> a = 2 * 5
+>>> b = 2 * 6
+>>> c = 2 * 7
+>>> 
+>>> t = 10, 12, 14
+>>> a, b, c = t
+>>> t = [10, 12, 14]
+>>> a, b, c = t
+>>> a
+10
+>>> b
+12
+>>> c
+14
+>>> a, b, c, d, e, f = map((2).__mul__, range(5, 11))
+>>> a
+10
+>>> b
+12
+>>> c
+14
+>>> d
+16
+>>> e
+18
+>>> f
+20
+>>> 
+>>> 
+>>> a = 2 ** 5
+>>> b = 2 ** 6
+>>> c = 2 ** 7
+>>> 
+>>> 2 ** 5
+32
+>>> 2 ** 6
+64
+>>> 2 ** 7
+128
+>>> def twopow(exp):
+	return 2 ** exp
+
+>>> twopow(5)
+32
+>>> twopow(6)
+64
+>>> twopow(7)
+128
+>>> a, b, c, d, e, f, g, h, i, j = map(twopow, range(10))
+>>> 
+>>> a
+1
+>>> b
+>>> d
+8
+>>> e
+16
+>>> f
+32
+>>> g
+64
+>>> 
+>>> def threepow(exp):
+	return 3 ** exp
+
+>>> twopow(5)
+32
+>>> threepow(5)
+243
+>>> def twopow(exp):
+	return 2 ** exp
+
+>>> def threepow(exp):
+	return 3 ** exp
+
+>>> def makepow(base):
+	def somepow(exp):
+		return base ** exp
+	return somepow
+
+>>> f = makepow(3)
+>>> f.__name__
+'somepow'
+>>> f(5)
+243
+>>> f.__closure__
+(<cell at 0x1041ad948: int object at 0x10030c1e8>,)
+>>> f.__closure__[0]
+<cell at 0x1041ad948: int object at 0x10030c1e8>
+>>> f.__closure__[0].cell_contents
+3
+>>> 
+>>> 
+>>> def makepow(base):
+	def somepow(exp):
+		return base ** exp
+	return somepow
+
+>>> twopow = makepow(2)
+>>> threepow = makepow(3)
+>>> fourpow = makepow(4)
+>>> 
+>>> twopow(5)
+32
+>>> threepow(5)
+243
+>>> fourpow(5)
+1024
+>>> 
+>>> twopow.__name__
+'somepow'
+>>> twopow.__code__
+<code object somepow at 0x1006f0330, file "<pyshell#659>", line 2>
+>>> twopow.__code__.co_code
+'\x88\x00\x00|\x00\x00\x13S'
+>>> threepow.__name__
+'somepow'
+>>> threepow.__code__.co_code
+'\x88\x00\x00|\x00\x00\x13S'
+>>> twopow.__closure__[0].cell_contents
+2
+>>> threepow.__closure__[0].cell_contents
+3
+>>> 
+>>> 
+>>> def makepow(base):
+	def somepow(exp):
+		return base ** exp
+	return somepow
+
+>>> twopow, threepow, fourpow, fivepow, sixpow, sevenpow = map(makepow, range(2, 8))
+>>> # locals() -> nested scope -> globals() -> __builtins__ -> NameError
+>>> # all assignments by default do into locals()
+>>> # inner functions remember (close-off) variables from the outer functions
+>>> # The purpose of a def-in-a-def is to make many functions with the same name, doc, and code
+>>> # but with different closure variable.
+>>> 
+>>> 
+>>> from dis import dis
+>>> dis(twopow)
+  3           0 LOAD_DEREF               0 (base)
+              3 LOAD_FAST                0 (exp)
+              6 BINARY_POWER        
+              7 RETURN_VALUE        
+>>> dis(threepow)
+  3           0 LOAD_DEREF               0 (base)
+              3 LOAD_FAST                0 (exp)
+              6 BINARY_POWER        
+              7 RETURN_VALUE        
+>>> help(twopow)
+Help on function somepow in module __main__:
+
+somepow(exp)
+
+>>> help(threepow)
+Help on function somepow in module __main__:
+
+somepow(exp)
+
+>>> 
+>>> 
+>>> print 30 + 40
+70
+>>> import sys
+>>> print >> sys.stderr, 30 + 40
+70
+>>> f = open('seventy.txt', 'w')
+>>> print >> f, 30 + 40
+>>> f.close()
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The hettinger Family
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Hettinger Family
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Hettinger Family
+========
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Hettinger Family
+===========
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Hettinger Family
+====================
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Hettinger Family
+====================
+* raymond
+* rachel
+* matthew
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Hettinger Family
+====================
+* Raymond
+* Rachel
+* Matthew
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Hettinger Family
+====================
+* Raymond
+* Rachel
+* Matthew
+
+>>> type(name)
+<type 'str'>
+>>> names
+
+Traceback (most recent call last):
+  File "<pyshell#701>", line 1, in <module>
+    names
+NameError: name 'names' is not defined
+>>> first_names
+['raymond', 'rachel', 'matthew']
+>>> len(first_names)
+3
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Simpsons Family
+===================
+* Homer
+* Marge
+* Bart
+* Lisa
+* Maggie
+
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Simpsons Family
+===================
+* Homer
+* Marge
+* Bart
+* Lisa
+* Maggie
+
+  7           0 LOAD_CONST               1 ('The %s Family')
+              3 LOAD_FAST                0 (lastname)
+              6 LOAD_ATTR                0 (title)
+              9 CALL_FUNCTION            0
+             12 BINARY_MODULO       
+             13 PRINT_ITEM          
+             14 PRINT_NEWLINE       
+
+  8          15 LOAD_CONST               2 ('=')
+             18 LOAD_CONST               3 (11)
+             21 LOAD_GLOBAL              1 (len)
+             24 LOAD_FAST                0 (lastname)
+             27 CALL_FUNCTION            1
+             30 BINARY_ADD          
+             31 BINARY_MULTIPLY     
+             32 PRINT_ITEM          
+             33 PRINT_NEWLINE       
+
+  9          34 SETUP_LOOP              29 (to 66)
+             37 LOAD_FAST                1 (first_names)
+             40 GET_ITER            
+        >>   41 FOR_ITER                21 (to 65)
+             44 STORE_FAST               2 (name)
+
+ 10          47 LOAD_CONST               4 ('* %s')
+             50 LOAD_FAST                2 (name)
+             53 LOAD_ATTR                0 (title)
+             56 CALL_FUNCTION            0
+             59 BINARY_MODULO       
+             60 PRINT_ITEM          
+             61 PRINT_NEWLINE       
+             62 JUMP_ABSOLUTE           41
+        >>   65 POP_BLOCK           
+
+ 11     >>   66 PRINT_NEWLINE       
+             67 LOAD_CONST               5 (None)
+             70 RETURN_VALUE        
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Simpsons Family
+===================
+* Homer
+* Marge
+* Bart
+* Lisa
+* Maggie
+
+  7           0 LOAD_CONST               1 ('The %s Family')
+              3 LOAD_FAST                0 (lastname)
+              6 LOAD_ATTR                0 (title)
+              9 CALL_FUNCTION            0
+             12 BINARY_MODULO       
+             13 PRINT_ITEM          
+             14 PRINT_NEWLINE       
+
+  8          15 LOAD_CONST               2 ('=')
+             18 LOAD_CONST               3 (11)
+             21 LOAD_GLOBAL              1 (len)
+             24 LOAD_FAST                0 (lastname)
+             27 CALL_FUNCTION            1
+             30 BINARY_ADD          
+             31 BINARY_MULTIPLY     
+             32 PRINT_ITEM          
+             33 PRINT_NEWLINE       
+
+  9          34 SETUP_LOOP              29 (to 66)
+             37 LOAD_FAST                1 (first_names)
+             40 GET_ITER            
+        >>   41 FOR_ITER                21 (to 65)
+             44 STORE_FAST               2 (name)
+
+ 10          47 LOAD_CONST               4 ('* %s')
+             50 LOAD_FAST                2 (name)
+             53 LOAD_ATTR                0 (title)
+             56 CALL_FUNCTION            0
+             59 BINARY_MODULO       
+             60 PRINT_ITEM          
+             61 PRINT_NEWLINE       
+             62 JUMP_ABSOLUTE           41
+        >>   65 POP_BLOCK           
+
+ 11     >>   66 PRINT_NEWLINE       
+             67 LOAD_CONST               5 (None)
+             70 RETURN_VALUE        
+Help on function show_family in module __main__:
+
+show_family(lastname, first_names)
+    Display family members in a nice tabular format
+
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Simpsons Family
+===================
+* Homer
+* Marge
+* Bart
+* Lisa
+* Maggie
+
+  7           0 LOAD_CONST               1 ('The %s Family')
+              3 LOAD_FAST                0 (lastname)
+              6 LOAD_ATTR                0 (title)
+              9 CALL_FUNCTION            0
+             12 BINARY_MODULO       
+             13 PRINT_ITEM          
+             14 PRINT_NEWLINE       
+
+  8          15 LOAD_CONST               2 ('=')
+             18 LOAD_CONST               3 (11)
+             21 LOAD_GLOBAL              1 (len)
+             24 LOAD_FAST                0 (lastname)
+             27 CALL_FUNCTION            1
+             30 BINARY_ADD          
+             31 BINARY_MULTIPLY     
+             32 PRINT_ITEM          
+             33 PRINT_NEWLINE       
+
+  9          34 SETUP_LOOP              29 (to 66)
+             37 LOAD_FAST                1 (first_names)
+             40 GET_ITER            
+        >>   41 FOR_ITER                21 (to 65)
+             44 STORE_FAST               2 (name)
+
+ 10          47 LOAD_CONST               4 ('* %s')
+             50 LOAD_FAST                2 (name)
+             53 LOAD_ATTR                0 (title)
+             56 CALL_FUNCTION            0
+             59 BINARY_MODULO       
+             60 PRINT_ITEM          
+             61 PRINT_NEWLINE       
+             62 JUMP_ABSOLUTE           41
+        >>   65 POP_BLOCK           
+
+ 11     >>   66 PRINT_NEWLINE       
+             67 LOAD_CONST               5 (None)
+             70 RETURN_VALUE        
+Help on function show_family in module __main__:
+
+show_family(lastname, first_names)
+    Display family members in a nice tabular format
+
+Done!
+====================
+>>> import sys
+>>> sys.stdout
+<idlelib.PyShell.PseudoOutputFile object at 0x1039649d0>
+>>> sys.stdout.write('Hey, this is just like printing!\n')
+Hey, this is just like printing!
+>>> f = sys.stdout
+>>> f.stdout.write('Hey, this is just like printing!\n')
+
+Traceback (most recent call last):
+  File "<pyshell#708>", line 1, in <module>
+    f.stdout.write('Hey, this is just like printing!\n')
+AttributeError: 'PseudoOutputFile' object has no attribute 'stdout'
+>>> f.write('Hey, this is just like printing!\n')
+Hey, this is just like printing!
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Simpsons Family
+===================
+* Homer
+* Marge
+* Bart
+* Lisa
+* Maggie
+
+  8           0 LOAD_CONST               1 ('The %s Family')
+              3 LOAD_FAST                0 (lastname)
+              6 LOAD_ATTR                0 (title)
+              9 CALL_FUNCTION            0
+             12 BINARY_MODULO       
+             13 PRINT_ITEM          
+             14 PRINT_NEWLINE       
+
+  9          15 LOAD_CONST               2 ('=')
+             18 LOAD_CONST               3 (11)
+             21 LOAD_GLOBAL              1 (len)
+             24 LOAD_FAST                0 (lastname)
+             27 CALL_FUNCTION            1
+             30 BINARY_ADD          
+             31 BINARY_MULTIPLY     
+             32 PRINT_ITEM          
+             33 PRINT_NEWLINE       
+
+ 10          34 SETUP_LOOP              29 (to 66)
+             37 LOAD_FAST                1 (first_names)
+             40 GET_ITER            
+        >>   41 FOR_ITER                21 (to 65)
+             44 STORE_FAST               2 (name)
+
+ 11          47 LOAD_CONST               4 ('* %s')
+             50 LOAD_FAST                2 (name)
+             53 LOAD_ATTR                0 (title)
+             56 CALL_FUNCTION            0
+             59 BINARY_MODULO       
+             60 PRINT_ITEM          
+             61 PRINT_NEWLINE       
+             62 JUMP_ABSOLUTE           41
+        >>   65 POP_BLOCK           
+
+ 12     >>   66 PRINT_NEWLINE       
+             67 LOAD_CONST               5 (None)
+             70 RETURN_VALUE        
+Help on function show_family in module __main__:
+
+show_family(lastname, first_names)
+    Display family members in a nice tabular format
+
+Done!
+====================
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Simpsons Family
+===================
+* Homer
+* Marge
+* Bart
+* Lisa
+* Maggie
+
+  8           0 LOAD_CONST               1 ('The %s Family')
+              3 LOAD_FAST                0 (lastname)
+              6 LOAD_ATTR                0 (title)
+              9 CALL_FUNCTION            0
+             12 BINARY_MODULO       
+             13 PRINT_ITEM          
+             14 PRINT_NEWLINE       
+
+  9          15 LOAD_CONST               2 ('=')
+             18 LOAD_CONST               3 (11)
+             21 LOAD_GLOBAL              1 (len)
+             24 LOAD_FAST                0 (lastname)
+             27 CALL_FUNCTION            1
+             30 BINARY_ADD          
+             31 BINARY_MULTIPLY     
+             32 PRINT_ITEM          
+             33 PRINT_NEWLINE       
+
+ 10          34 SETUP_LOOP              29 (to 66)
+             37 LOAD_FAST                1 (first_names)
+             40 GET_ITER            
+        >>   41 FOR_ITER                21 (to 65)
+             44 STORE_FAST               2 (name)
+
+ 11          47 LOAD_CONST               4 ('* %s')
+             50 LOAD_FAST                2 (name)
+             53 LOAD_ATTR                0 (title)
+             56 CALL_FUNCTION            0
+             59 BINARY_MODULO       
+             60 PRINT_ITEM          
+             61 PRINT_NEWLINE       
+             62 JUMP_ABSOLUTE           41
+        >>   65 POP_BLOCK           
+
+ 12     >>   66 PRINT_NEWLINE       
+             67 LOAD_CONST               5 (None)
+             70 RETURN_VALUE        
+Help on function show_family in module __main__:
+
+show_family(lastname, first_names)
+    Display family members in a nice tabular format
+
+Done!
+====================
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Simpsons Family
+===================
+* Homer
+* Marge
+* Bart
+* Lisa
+* Maggie
+
+Help on function show_family in module __main__:
+
+show_family(lastname, first_names)
+    Display family members in a nice tabular format
+
+Done!
+====================
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+The Simpsons Family
+===================
+* Homer
+* Marge
+* Bart
+* Lisa
+* Maggie
+
+Help on function show_family in module __main__:
+
+show_family(lastname, first_names)
+    Display family members in a nice tabular format
+
+Done!
+====================
+>>> class FileLike:
+	def write(self, s):
+		print '<< %r >>' % s
+
+		
+>>> f = FileLike()
+>>> print >> f, 'Howdy'
+<< 'Howdy' >>
+<< '\n' >>
+>>> class FileLike:
+	def __init__(self):
+		self.lines = []
+	def write(self, s):
+		self.lines.append(s)
+	def getvalue(self):
+		return ''.join(self.lines)
+
+	
+>>> f = FileLike()
+>>> print >> f, 'Hello'
+>>> print >> f, 'World'
+>>> f.lines
+['Hello', '\n', 'World', '\n']
+>>> f.getvalue()
+'Hello\nWorld\n'
+>>> from StringIO import StringIO
+>>> f = StringIO()
+>>> print >> 'I', 'love', 'Python'
+
+Traceback (most recent call last):
+  File "<pyshell#727>", line 1, in <module>
+    print >> 'I', 'love', 'Python'
+AttributeError: 'str' object has no attribute 'write'
+>>> print >> f, 'I', 'love', 'Python'
+>>> print >> f, 'Tell me more!'
+>>> f.getvalue()
+'I love Python\nTell me more!\n'
+>>> 
+>>> d = dict(raymond='red', rachel='blue', matthew='yellow')
+>>> type(d)
+<type 'dict'>
+>>> import json
+>>> json.dumps(d)
+'{"matthew": "yellow", "rachel": "blue", "raymond": "red"}'
+>>> 
+>>> 
+>>> # If you didn't have dumps, could you write your own?
+>>> 
+>>> f = StringIO()
+>>> json.dump(d, f)
+>>> f.getvalue()
+'{"matthew": "yellow", "rachel": "blue", "raymond": "red"}'
+>>> # Ghost Fleet
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+THE SIMPSONS FAMILY
+===================
+* HOMER
+* MARGE
+* BART
+* LISA
+* MAGGIE
+
+
+Help on function show_family in module __main__:
+
+show_family(lastname, first_names)
+    Display family members in a nice tabular format
+
+Done!
+====================
+>>> type(s)
+<type 'str'>
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+THE SIMPSONS FAMILY
+===================
+* HOMER
+* MARGE
+* BART
+* LISA
+* MAGGIE
+
+
+Help on function show_family in module __main__:
+
+show_family(lastname, first_names)
+    Display family members in a nice tabular format
+
+Done!
+====================
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/redirect.py ==========
+THE SIMPSONS FAMILY
+===================
+* HOMER
+* MARGE
+* BART
+* LISA
+* MAGGIE
+
+
+Help on function show_family in module __main__:
+
+show_family(lastname, first_names)
+    Display family members in a nice tabular format
+
+Done!
+====================
+>>> dir(StringIO)
+['__doc__', '__init__', '__iter__', '__module__', 'close', 'flush', 'getvalue', 'isatty', 'next', 'read', 'readline', 'readlines', 'seek', 'tell', 'truncate', 'write', 'writelines']
+>>> 
+>>> 
+>>> import contextlib
+>>> help(contextlib.closing)
+Help on class closing in module contextlib:
+
+class closing(__builtin__.object)
+ |  Context to automatically close something at the end of a block.
+ |  
+ |  Code like this:
+ |  
+ |      with closing(<module>.open(<arguments>)) as f:
+ |          <block>
+ |  
+ |  is equivalent to this:
+ |  
+ |      f = <module>.open(<arguments>)
+ |      try:
+ |          <block>
+ |      finally:
+ |          f.close()
+ |  
+ |  Methods defined here:
+ |  
+ |  __enter__(self)
+ |  
+ |  __exit__(self, *exc_info)
+ |  
+ |  __init__(self, thing)
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |  
+ |  __weakref__
+ |      list of weak references to the object (if defined)
+
+>>> import algebra
+>>> help(algebra)
+Help on module algebra:
+
+NAME
+    algebra - Fancy, expensive math package for rich people who have forgotten everything since 7th grade
+
+FILE
+    /Users/raymond/Dropbox/Public/sj134/algebra.py
+
+FUNCTIONS
+    area(radius)
+        Compute the area of a circle
+        
+        >>> area(10)
+        314.15700000000004
+    
+    area_triangle(base, height)
+        Return the area of a triangle
+        
+        >>> area_triangle(base=10, height=6)
+        30.0
+    
+    quadratic(a, b, c)
+        Return two root of the quadratic equation:  ax^2 + bx + c = 0
+        
+        >>> x1, x2 = quadratic(a=8, b=22, c=15)
+        >>> 8 * x1**2.0 + 22 * x1 + 15
+        0.0
+        >>> 8 * x2**2.0 + 22 * x2 + 15
+        0.0
+        >>> x1, x2
+        (-1.25, -1.5)
+
+DATA
+    pi = 3.14157
+
+
+>>> algebra.area_triangle(20, -5)
+
+Traceback (most recent call last):
+  File "<pyshell#756>", line 1, in <module>
+    algebra.area_triangle(20, -5)
+  File "/Users/raymond/Dropbox/Public/sj134/algebra.py", line 30, in area_triangle
+    raise RuntimeError('Imaginary numbers are only supported in complex arithmetic')
+RuntimeError: Imaginary numbers are only supported in complex arithmetic
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/monkey_patching.py", line 12, in <module>
+    print algebra.area_triangle(20, -15)
+  File "/Users/raymond/Dropbox/Public/sj134/algebra.py", line 28, in area_triangle
+    raise RuntimeError('Imaginary numbers are only supported in complex arithmetic')
+RuntimeError: Imaginary numbers are only supported in complex arithmetic
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/monkey_patching.py", line 24, in <module>
+    print algebra.area_triangle(20, -15)
+  File "/Users/raymond/Dropbox/Public/sj134/algebra.py", line 28, in area_triangle
+    raise RuntimeError('Imaginary numbers are only supported in complex arithmetic')
+RuntimeError: Imaginary numbers are only supported in complex arithmetic
+>>> better_area_triangle(10, -15)
+
+Traceback (most recent call last):
+  File "<pyshell#757>", line 1, in <module>
+    better_area_triangle(10, -15)
+  File "/Users/raymond/Dropbox/Public/sj134/monkey_patching.py", line 18, in better_area_triangle
+    raise ValueError('Unusable arguments (check to make sure the inputs are non-negative)')
+ValueError: Unusable arguments (check to make sure the inputs are non-negative)
+>>> better_area_triangle(10, 15)
+75.0
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/monkey_patching.py", line 24, in <module>
+    print algebra.area_triangle(20, -15)
+  File "/Users/raymond/Dropbox/Public/sj134/monkey_patching.py", line 18, in better_area_triangle
+    raise ValueError('Unusable arguments (check to make sure the inputs are non-negative)')
+ValueError: Unusable arguments (check to make sure the inputs are non-negative)
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+Oops, sorry about the negative number
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+Oops, sorry about the negative number
+2827.413
+>>> import circuitous
+>>> c = circuitous.Circle(30)
+>>> c.area()
+2827.4333882308133
+>>> algebra.pi
+3.14157
+>>> # 3.14159.
+>>> import math
+>>> math.pi
+3.141592653589793
+>>> # MSDN
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+Oops, sorry about the negative number
+2827.43338823
+>>> import math
+>>> math.pi = 3.2
+>>> import circuitous
+>>> c = circuitous.Circle(10)
+>>> c.area()
+320.0
+>>> c.perimeter()
+64.0
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+Oops, sorry about the negative number
+2827.43338823
+(-0.6666666666666666, -1.25)
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+Oops, sorry about the negative number
+2827.43338823
+(-0.6666666666666666, -1.25)
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/monkey_patching.py", line 36, in <module>
+    print algebra.quadratic(a=12, b=8, c=10)
+  File "/Users/raymond/Dropbox/Public/sj134/algebra.py", line 43, in quadratic
+    discriminant = math.sqrt(b ** 2.0 - 4.0 * a * c)
+ValueError: math domain error
+>>> 
+>>> import math
+>>> math.sqrt(25)
+5.0
+>>> math.sqrt(2)
+1.4142135623730951
+>>> math.sqrt(-25)
+
+Traceback (most recent call last):
+  File "<pyshell#777>", line 1, in <module>
+    math.sqrt(-25)
+ValueError: math domain error
+>>> 
+>>> (-1) ** 0.5
+
+Traceback (most recent call last):
+  File "<pyshell#779>", line 1, in <module>
+    (-1) ** 0.5
+ValueError: negative number cannot be raised to a fractional power
+>>> 
+>>> 
+>>> 
+>>> 1j  ** 2
+(-1+0j)
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+Oops, sorry about the negative number
+2827.43338823
+(-0.6666666666666666, -1.25)
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/monkey_patching.py", line 43, in <module>
+    print algebra.quadratic(a=12, b=8, c=10)
+  File "/Users/raymond/Dropbox/Public/sj134/algebra.py", line 43, in quadratic
+    discriminant = math.sqrt(b ** 2.0 - 4.0 * a * c)
+ValueError: math domain error
+>>> >>> (-1) ** 0.5
+SyntaxError: invalid syntax
+>>> 
+>>> 
+>>> better_sqrt(25)
+5.0
+>>> better_sqrt(2)
+1.4142135623730951
+>>> better_sqrt(-25)
+5j
+>>> 
+>>> 
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+Oops, sorry about the negative number
+2827.43338823
+(-0.6666666666666666, -1.25)
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/monkey_patching.py", line 45, in <module>
+    print algebra.quadratic(a=12, b=8, c=10)
+  File "/Users/raymond/Dropbox/Public/sj134/algebra.py", line 43, in quadratic
+    discriminant = math.sqrt(b ** 2.0 - 4.0 * a * c)
+ValueError: math domain error
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/monkey_patching.py ======
+150.0
+Oops, sorry about the negative number
+2827.43338823
+(-0.6666666666666666, -1.25)
+((-0.3333333333333333+0.8498365855987974j), (-0.3333333333333333-0.8498365855987974j))
+>>> 
+>>> # DOS:  Abort, Retry, or Fail?
+>>> 
+>>> # Dbase IV:   1Mb  10%-User caused    90%-MemoryErrors
+>>> 
+>>> 
+>>> 
+>>> 
+>>> import math
+>>> x = 4
+>>> y = math.cos(x)
+>>> 
+>>> 
+>>> orig_cos = math.cos
+>>> def logging_cos(x):
+	'Wrap cos() to show the inputs and outputs for debugging purposes'
+	print 'cos() was called with', x
+	answer = orig_cos(x)
+	print 'the answer is', x
+	return answer
+
+>>> math.cos = logging_cos
+>>> 
+>>> y = math.cos(x)
+cos() was called with 4
+the answer is 4
+>>> y
+-0.6536436208636119
+>>> 
+>>> 
+>>> 
+>>> 
+=============================== RESTART: Shell ===============================
+>>> def logging_cos(x):
+	'Wrap cos() to show the inputs and outputs for debugging purposes'
+	print 'cos() was called with', x
+	answer = orig_cos(x)
+	print 'the answer is', x
+	return answer
+
+>>> 
+>>> 
+>>> 
+=============================== RESTART: Shell ===============================
+>>> import math
+>>> x = 4
+>>> y = math.cos(x)
+>>> z = math.sin(x)
+>>> 
+>>> 
+>>> orig_cos = math.cos
+>>> def logging_cos(x):
+	'Wrap cos() to show the inputs and outputs for debugging purposes'
+	print 'cos() was called with', x
+	answer = orig_cos(x)
+	print 'the answer is', x
+	return answer
+
+>>> orig_sin = math.sin
+>>> def logging_sin(x):
+	'Wrap sin() to show the inputs and outputs for debugging purposes'
+	print 'sin() was called with', x
+	answer = orig_sin(x)
+	print 'the answer is', x
+	return answer
+
+>>> logging_cos(3)
+cos() was called with 3
+the answer is 3
+-0.9899924966004454
+>>> logging_sin(3)
+sin() was called with 3
+the answer is 3
+0.1411200080598672
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+>>> 
+>>> 
+>>> import time
+>>> time.time()
+1456361491.198019
+>>> time.ctime()
+'Wed Feb 24 16:51:37 2016'
+>>> x = 10; print x**2
+100
+>>> time.sleep(5); print 'Done!'
+Done!
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+>>> big_calc(10)
+11
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+>>> big_calc(10)
+Doing hard work!
+
+Traceback (most recent call last):
+  File "<pyshell#846>", line 1, in <module>
+    big_calc(10)
+  File "/Users/raymond/Dropbox/Public/sj134/decorator_school.py", line 27, in big_calc
+    time.sleep(1)
+NameError: global name 'time' is not defined
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+>>> big_calc(10)
+Doing hard work!
+11
+>>> big_calc(20)
+Doing hard work!
+21
+>>> big_calc(10)
+Doing hard work!
+11
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+>>> big_calc(10)
+Doing hard work!
+11
+>>> big_calc(20)
+Doing hard work!
+21
+>>> bc_answers
+{10: 11, 20: 21}
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+>>> big_calc(10)
+Doing hard work!
+11
+>>> big_calc(20)
+Doing hard work!
+21
+>>> big_calc(10)
+11
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+>>> cube(11)
+1331
+>>> cube(11)
+1331
+>>> cu_answers
+{11: 1331}
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/decorator_school.py", line 28, in <module>
+    @add_logging
+  File "/Users/raymond/Dropbox/Public/sj134/decorator_school.py", line 19, in cache
+    return cube
+NameError: global name 'cube' is not defined
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+Doing hard work!
+Doing hard work!
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+Doing hard work!
+11
+Doing hard work!
+21
+11
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+Doing hard work!
+11
+Doing hard work!
+21
+11
+>>> help(big_calc)
+Help on function inner in module __main__:
+
+inner(x)
+
+>>> 
+>>> big_calc.__name__
+'inner'
+>>> big_calc.__doc__
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+Doing hard work!
+11
+Doing hard work!
+21
+11
+>>> help(big_calc)
+Help on function big_calc in module __main__:
+
+big_calc(x)
+    Simulate a slow computational intensive function or a func that has I/O blocking
+
+>>> from dis import dis
+>>> dis(big_calc)
+ 14           0 LOAD_FAST                0 (x)
+              3 LOAD_DEREF               0 (answers)
+              6 COMPARE_OP               6 (in)
+              9 POP_JUMP_IF_FALSE       20
+
+ 15          12 LOAD_DEREF               0 (answers)
+             15 LOAD_FAST                0 (x)
+             18 BINARY_SUBSCR       
+             19 RETURN_VALUE        
+
+ 16     >>   20 LOAD_DEREF               1 (orig_func)
+             23 LOAD_FAST                0 (x)
+             26 CALL_FUNCTION            1
+             29 STORE_FAST               1 (answer)
+
+ 17          32 LOAD_FAST                1 (answer)
+             35 LOAD_DEREF               0 (answers)
+             38 LOAD_FAST                0 (x)
+             41 STORE_SUBSCR        
+
+ 18          42 LOAD_FAST                1 (answer)
+             45 RETURN_VALUE        
+>>> big_calc.__closure__
+(<cell at 0x1038aeb08: dict object at 0x1039346e0>, <cell at 0x1038aeb40: function object at 0x10393f9b0>)
+>>> big_calc.__closure__[0].cell_contents
+{10: 11, 20: 21}
+>>> big_calc.__closure__[1].cell_contents
+<function big_calc at 0x10393f9b0>
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+Doing hard work!
+11
+Doing hard work!
+21
+11
+>>> help(big_calc)
+Help on function big_calc in module __main__:
+
+big_calc(x)
+    Simulate a slow computational intensive function or a func that has I/O blocking
+
+>>> help(cube)
+Help on function logging_func in module __main__:
+
+logging_func(x)
+
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+Doing hard work!
+11
+Doing hard work!
+21
+11
+>>> help(cube)
+Help on function cube in module __main__:
+
+cube(x)
+
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+Doing hard work!
+11
+Doing hard work!
+21
+11
+>>> help(cube)
+Help on function cube in module __main__:
+
+cube(x)
+    Return a value times itself thrice
+
+>>> import functools
+>>> help(wraps)
+
+Traceback (most recent call last):
+  File "<pyshell#874>", line 1, in <module>
+    help(wraps)
+NameError: name 'wraps' is not defined
+>>> dir(functools)
+['WRAPPER_ASSIGNMENTS', 'WRAPPER_UPDATES', '__builtins__', '__doc__', '__file__', '__name__', '__package__', 'cmp_to_key', 'partial', 'reduce', 'total_ordering', 'update_wrapper', 'wraps']
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+Doing hard work!
+11
+Doing hard work!
+21
+11
+>>> help(cube)
+Help on function cube in module __main__:
+
+cube(x)
+    Return a value times itself thrice
+
+>>> help(big_calc)
+Help on function big_calc in module __main__:
+
+big_calc(x)
+    Simulate a slow computational intensive function or a func that has I/O blocking
+
+>>> import math
+>>> math.tan = add_logging(math.tan)
+>>> 
+>>> y = math.tan(4.5)
+tan() was called with 4.5
+the answer is 4.5
+>>> math.tan = cache(math.tan)
+>>> y = math.tan(4.5)
+tan() was called with 4.5
+the answer is 4.5
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/fibo.py ============
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/fibo.py ============
+0 0
+1 1
+2 1
+3 2
+4 3
+5 5
+6 8
+7 13
+8 21
+9 34
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/fibo.py ============
+0 0
+1 1
+2 1
+3 2
+4 3
+5 5
+6 8
+7 13
+8 21
+9 34
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/fibo.py ============
+55
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/fibo.py ============
+610
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/fibo.py ============
+6765
+>>> # dilemma
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/fibo.py ============
+280571172992510140037611932413038677189525
+>>> 
+>>> 
+>>> 

@@ -1,0 +1,27 @@
+       ''' Compute the world famous Fibonacci function
+       
+           See: https://en.wikipedia.org/wiki/Fibonacci_number
+       
+               F(0)    ->  0
+               F(1)    ->  1
+               F(n)    ->  F(n-1) + F(n-2)  where n >= 2
+           
+    1: '''
+       
+    1: from decorator_school import cache
+       
+    1: def fibo(n):
+           a, b = 0, 1
+           for i in xrange(n):
+               a, b = b, a+b
+           return a
+       
+    1: @cache
+       def fibo(n):
+  201:     if n == 0: return 0
+  200:     if n == 1: return 1
+  199:     return fibo(n-1) + fibo(n-2)
+       
+    1: if __name__ == '__main__':
+       
+    1:     print fibo(200)

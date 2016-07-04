@@ -1,0 +1,1383 @@
+Python 2.7.11 (v2.7.11:6d1b6a68f775, Dec  5 2015, 12:54:16) 
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type "copyright", "credits" or "license()" for more information.
+>>> 
+>>> import requests
+
+Warning (from warnings module):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/cffi/model.py", line 526
+    % self._get_c_name())
+UserWarning: 'point_conversion_form_t' has no values explicitly defined; next version will refuse to guess which integer type it is meant to be (unsigned/signed, int/long)
+>>> 
+>>> 
+>>> r = requests.get('http://www.jython.org')
+>>> r.status_code
+200
+>>> r.headers
+{'Content-Length': '19210', 'Via': '1.1 sjc12-dmz-wsa-10-mgmt.cisco.com:80 (Cisco-WSA/8.8.0-085)', 'Accept-Ranges': 'bytes', 'Server': 'nginx', 'Last-Modified': 'Sun, 03 May 2015 07:46:38 GMT', 'Connection': 'keep-alive', 'ETag': '"5545d25e-4b0a"', 'Date': 'Thu, 25 Feb 2016 19:31:14 GMT', 'Content-Type': 'text/html'}
+>>> print r.content[:200]
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xh
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/github_rest_api.py ======
+
+Warning (from warnings module):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/cffi/model.py", line 526
+    % self._get_c_name())
+UserWarning: 'point_conversion_form_t' has no values explicitly defined; next version will refuse to guess which integer type it is meant to be (unsigned/signed, int/long)
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/github_rest_api.py", line 9, in <module>
+    r = request.gets('https://api.github.com/users/raymondh')
+NameError: name 'request' is not defined
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/github_rest_api.py ======
+
+Warning (from warnings module):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/cffi/model.py", line 526
+    % self._get_c_name())
+UserWarning: 'point_conversion_form_t' has no values explicitly defined; next version will refuse to guess which integer type it is meant to be (unsigned/signed, int/long)
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/github_rest_api.py", line 9, in <module>
+    r = requests.gets('https://api.github.com/users/raymondh')
+AttributeError: 'module' object has no attribute 'gets'
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/github_rest_api.py ======
+
+Warning (from warnings module):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/cffi/model.py", line 526
+    % self._get_c_name())
+UserWarning: 'point_conversion_form_t' has no values explicitly defined; next version will refuse to guess which integer type it is meant to be (unsigned/signed, int/long)
+>>> r.status_code
+200
+>>> r.headers
+{'X-XSS-Protection': '1; mode=block', 'Content-Security-Policy': "default-src 'none'", 'Access-Control-Expose-Headers': 'ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval', 'Transfer-Encoding': 'chunked', 'Last-Modified': 'Thu, 19 Feb 2015 23:15:19 GMT', 'Access-Control-Allow-Origin': '*', 'X-Frame-Options': 'deny', 'Status': '200 OK', 'X-Served-By': '8dd185e423974a7e13abbbe6e060031e', 'X-GitHub-Request-Id': '806BF1AB:136D0:934E82:56CF581E', 'ETag': 'W/"906323f8dc6c2da824b4fa2804f34acf"', 'Cache-Control': 'public, max-age=60, s-maxage=60', 'Date': 'Thu, 25 Feb 2016 19:38:07 GMT', 'X-RateLimit-Remaining': '57', 'Strict-Transport-Security': 'max-age=31536000; includeSubdomains; preload', 'Server': 'GitHub.com', 'X-GitHub-Media-Type': 'github.v3', 'X-Content-Type-Options': 'nosniff', 'Content-Encoding': 'gzip', 'Vary': 'Accept, Accept-Encoding', 'X-RateLimit-Limit': '60', 'Access-Control-Allow-Credentials': 'true', 'Content-Type': 'application/json; charset=utf-8', 'X-RateLimit-Reset': '1456432450'}
+>>> r.headers['Content-Type']
+'application/json; charset=utf-8'
+>>> print r.content
+{"login":"raymondh","id":167559,"avatar_url":"https://avatars.githubusercontent.com/u/167559?v=3","gravatar_id":"","url":"https://api.github.com/users/raymondh","html_url":"https://github.com/raymondh","followers_url":"https://api.github.com/users/raymondh/followers","following_url":"https://api.github.com/users/raymondh/following{/other_user}","gists_url":"https://api.github.com/users/raymondh/gists{/gist_id}","starred_url":"https://api.github.com/users/raymondh/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/raymondh/subscriptions","organizations_url":"https://api.github.com/users/raymondh/orgs","repos_url":"https://api.github.com/users/raymondh/repos","events_url":"https://api.github.com/users/raymondh/events{/privacy}","received_events_url":"https://api.github.com/users/raymondh/received_events","type":"User","site_admin":false,"name":"Raymond Hettinger","company":"SauceLabs","blog":null,"location":"Los Angeles and San Francisco California","email":"raymond.hettinger@gmail.com","hireable":null,"bio":null,"public_repos":0,"public_gists":0,"followers":58,"following":0,"created_at":"2009-12-14T20:09:05Z","updated_at":"2015-02-19T23:15:19Z"}
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/github_rest_api.py ======
+
+Warning (from warnings module):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/cffi/model.py", line 526
+    % self._get_c_name())
+UserWarning: 'point_conversion_form_t' has no values explicitly defined; next version will refuse to guess which integer type it is meant to be (unsigned/signed, int/long)
+>>> type(info)
+<type 'dict'>
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/github_rest_api.py ======
+
+Warning (from warnings module):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/cffi/model.py", line 526
+    % self._get_c_name())
+UserWarning: 'point_conversion_form_t' has no values explicitly defined; next version will refuse to guess which integer type it is meant to be (unsigned/signed, int/long)
+>>> type(info)
+<type 'dict'>
+>>> info.keys()
+[u'public_repos', u'site_admin', u'subscriptions_url', u'gravatar_id', u'hireable', u'id', u'followers_url', u'following_url', u'blog', u'followers', u'location', u'type', u'email', u'bio', u'gists_url', u'company', u'events_url', u'html_url', u'updated_at', u'received_events_url', u'starred_url', u'public_gists', u'name', u'organizations_url', u'url', u'created_at', u'avatar_url', u'repos_url', u'following', u'login']
+>>> info.values()
+[0, False, u'https://api.github.com/users/raymondh/subscriptions', u'', None, 167559, u'https://api.github.com/users/raymondh/followers', u'https://api.github.com/users/raymondh/following{/other_user}', None, 58, u'Los Angeles and San Francisco California', u'User', u'raymond.hettinger@gmail.com', None, u'https://api.github.com/users/raymondh/gists{/gist_id}', u'SauceLabs', u'https://api.github.com/users/raymondh/events{/privacy}', u'https://github.com/raymondh', u'2015-02-19T23:15:19Z', u'https://api.github.com/users/raymondh/received_events', u'https://api.github.com/users/raymondh/starred{/owner}{/repo}', 0, u'Raymond Hettinger', u'https://api.github.com/users/raymondh/orgs', u'https://api.github.com/users/raymondh', u'2009-12-14T20:09:05Z', u'https://avatars.githubusercontent.com/u/167559?v=3', u'https://api.github.com/users/raymondh/repos', 0, u'raymondh']
+>>> info.items()
+[(u'public_repos', 0), (u'site_admin', False), (u'subscriptions_url', u'https://api.github.com/users/raymondh/subscriptions'), (u'gravatar_id', u''), (u'hireable', None), (u'id', 167559), (u'followers_url', u'https://api.github.com/users/raymondh/followers'), (u'following_url', u'https://api.github.com/users/raymondh/following{/other_user}'), (u'blog', None), (u'followers', 58), (u'location', u'Los Angeles and San Francisco California'), (u'type', u'User'), (u'email', u'raymond.hettinger@gmail.com'), (u'bio', None), (u'gists_url', u'https://api.github.com/users/raymondh/gists{/gist_id}'), (u'company', u'SauceLabs'), (u'events_url', u'https://api.github.com/users/raymondh/events{/privacy}'), (u'html_url', u'https://github.com/raymondh'), (u'updated_at', u'2015-02-19T23:15:19Z'), (u'received_events_url', u'https://api.github.com/users/raymondh/received_events'), (u'starred_url', u'https://api.github.com/users/raymondh/starred{/owner}{/repo}'), (u'public_gists', 0), (u'name', u'Raymond Hettinger'), (u'organizations_url', u'https://api.github.com/users/raymondh/orgs'), (u'url', u'https://api.github.com/users/raymondh'), (u'created_at', u'2009-12-14T20:09:05Z'), (u'avatar_url', u'https://avatars.githubusercontent.com/u/167559?v=3'), (u'repos_url', u'https://api.github.com/users/raymondh/repos'), (u'following', 0), (u'login', u'raymondh')]
+>>> map(str, info.keys())
+['public_repos', 'site_admin', 'subscriptions_url', 'gravatar_id', 'hireable', 'id', 'followers_url', 'following_url', 'blog', 'followers', 'location', 'type', 'email', 'bio', 'gists_url', 'company', 'events_url', 'html_url', 'updated_at', 'received_events_url', 'starred_url', 'public_gists', 'name', 'organizations_url', 'url', 'created_at', 'avatar_url', 'repos_url', 'following', 'login']
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/github_rest_api.py ======
+
+Warning (from warnings module):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/cffi/model.py", line 526
+    % self._get_c_name())
+UserWarning: 'point_conversion_form_t' has no values explicitly defined; next version will refuse to guess which integer type it is meant to be (unsigned/signed, int/long)
+Mr Raymond Hettinger works for SauceLabs.  Contact at raymond.hettinger@gmail.com
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/github_rest_api.py ======
+
+Warning (from warnings module):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/cffi/model.py", line 526
+    % self._get_c_name())
+UserWarning: 'point_conversion_form_t' has no values explicitly defined; next version will refuse to guess which integer type it is meant to be (unsigned/signed, int/long)
+Mr Raymond Hettinger works for SauceLabs.  Contact at raymond.hettinger@gmail.com
+Mr Raymond Hettinger works for SauceLabs.  Contact at raymond.hettinger@gmail.com
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/github_rest_api.py ======
+
+Warning (from warnings module):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/cffi/model.py", line 526
+    % self._get_c_name())
+UserWarning: 'point_conversion_form_t' has no values explicitly defined; next version will refuse to guess which integer type it is meant to be (unsigned/signed, int/long)
+Mr Raymond Hettinger works for SauceLabs.  Contact at raymond.hettinger@gmail.com
+>>> 
+>>> 
+>>> 
+>>> 30 + 40*2
+110
+>>> # printf("%d\n", 30 + 40*2);
+>>> 
+>>> choice = raw_input('Choose a game: ')
+Choose a game: GlobalThermonuclearWar
+>>> 
+>>> expr = raw_input('Enter an expression: ')
+Enter an expression: 30 + 40*2
+>>> expr
+'30 + 40*2'
+>>> eval(expr)
+110
+>>> # Billion Laughs XML
+>>> 
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/repl.py ============
+% 30 + 40*2
+>>> expr
+'30 + 40*2'
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/repl.py ============
+% 30 + 40*2
+>>> expr
+'30 + 40*2'
+>>> result
+110
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/repl.py ============
+% 30 + 40*2
+110
+>>> 
+>>> 
+>>> s = "hello"
+>>> print s
+hello
+>>> s
+'hello'
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/repl.py ============
+% "he" + "llo"
+'hello'
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/repl.py ============
+% "he" + "llo"
+hello
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/repl.py ============
+% 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/repl.py ============
+% 30 + 40*2
+110
+% "he" + "llo"
+'hello'
+% 55 - 5
+50
+% 2 ** 200 - 1
+1606938044258990275541962092341162602522202993782792835301375L
+% hex(result)
+'0xffffffffffffffffffffffffffffffffffffffffffffffffffL'
+% 
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/repl.py", line 6, in <module>
+    expr = raw_input('% ')
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/idlelib/PyShell.py", line 1398, in readline
+    line = self._line_buffer or self.shell.readline()
+KeyboardInterrupt
+>>> 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/repl.py ============
+% 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/repl.py ============
+In [0]: 30 + 40*2
+Out[0]: 110
+
+In [0]: 55 - 5
+Out[0]: 50
+
+In [0]: 
+============ RESTART: /Users/raymond/Dropbox/Public/sj134/repl.py ============
+In [0]: 30 + 40*2
+Out[0]: 110
+
+In [1]: 55 - 5
+Out[1]: 50
+
+In [2]: Out[0] + Out[1]
+Out[2]: 160
+
+In [3]: 
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/repl.py", line 9, in <module>
+    expr = raw_input('In [%r]: ' % len(In))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/idlelib/PyShell.py", line 1398, in readline
+    line = self._line_buffer or self.shell.readline()
+KeyboardInterrupt
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+Doing hard work!
+11
+Doing hard work!
+21
+11
+>>> 
+>>> 
+>>> dispatch['sq'](6)
+36
+>>> dispatch['cu'](6)
+216
+>>> dispatch['co'](6)
+3
+>>> x = 8
+>>> program = 'sq co cu sq'
+>>> program.split()
+['sq', 'co', 'cu', 'sq']
+>>> for command in program.split():
+	print command
+
+	
+sq
+co
+cu
+sq
+>>> for command in program.split():
+	print dispatch[command]
+
+	
+<function square at 0x10423e140>
+<function collatz at 0x10423e8c0>
+<function cube at 0x10423e848>
+<function square at 0x10423e140>
+>>> for command in program.split():
+	x = dispatch[command](x)
+	print x
+
+	
+64
+32
+32768
+1073741824
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+Doing hard work!
+11
+Doing hard work!
+21
+11
+>>> interpret(10)
+Enter a program: co sq co co cu
+10 --(co)--> 5
+--(sq)--> 25
+--(co)--> 76
+--(co)--> 38
+--(cu)--> 54872
+
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+Doing hard work!
+11
+Doing hard work!
+21
+11
+>>> interpret(10)
+Enter a program: co sq co co cu
+10 --(co)--> 5 --(sq)--> 25 --(co)--> 76 --(co)--> 38 --(cu)--> 54872
+>>> interpret(5)
+Enter a program: sq co co cube
+5 --(sq)--> 25 --(co)--> 76 --(co)--> 38
+
+Traceback (most recent call last):
+  File "<pyshell#57>", line 1, in <module>
+    interpret(5)
+  File "/Users/raymond/Dropbox/Public/sj134/decorator_school.py", line 31, in interpret
+    x = dispatch[command](x)
+KeyError: 'cube'
+>>> interpret(5)
+Enter a program: sq co co cu
+5 --(sq)--> 25 --(co)--> 76 --(co)--> 38 --(cu)--> 54872
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/decorator_school.py ======
+square() was called with 5
+the answer is 5
+cube() was called with 11
+the answer is 11
+Doing hard work!
+11
+Doing hard work!
+21
+11
+>>> dispatch
+{'sq': <function square at 0x1038688c0>, 'ha': <function half at 0x103868b90>, 'co': <function collatz at 0x103868b18>, 'cu': <function cube at 0x1038689b0>}
+>>> import bottle
+>>> import requests
+
+Warning (from warnings module):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/cffi/model.py", line 526
+    % self._get_c_name())
+UserWarning: 'point_conversion_form_t' has no values explicitly defined; next version will refuse to guess which integer type it is meant to be (unsigned/signed, int/long)
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+11.1803398875
+None
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+11.1803398875
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+11.1803398875
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 14, in <module>
+    print user(-5)
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 11, in user
+    return sqrt(x ** 3)
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 7, in sqrt
+    return math.sqrt(x) * 1j
+ValueError: math domain error
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+11.1803398875
+11.1803398875j
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+11.1803398875
+
+Warning (from warnings module):
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 7
+    warnings.warn('Caution, taking a square root of a negative number')
+UserWarning: Caution, taking a square root of a negative number
+11.1803398875j
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+11.1803398875
+
+Warning (from warnings module):
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 7
+    warnings.warn('Caution, taking a square root of a negative number')
+UserWarning: Caution, taking a square root of a negative number
+11.1803398875j
+14.6969384567
+14.6969384567j
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+11.1803398875
+
+Warning (from warnings module):
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 13
+    warnings.warn('Caution, taking a square root of a negative number')
+UserWarning: Caution, taking a square root of a negative number
+11.1803398875j
+14.6969384567
+
+Warning (from warnings module):
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 13
+    warnings.warn('Caution, taking a square root of a negative number')
+UserWarning: Caution, taking a square root of a negative number
+14.6969384567j
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+11.1803398875
+11.1803398875j
+14.6969384567
+14.6969384567j
+>>> import warnings
+>>> dir(warnings)
+['WarningMessage', '_OptionError', '__all__', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '_getaction', '_getcategory', '_processoptions', '_setoption', '_show_warning', 'catch_warnings', 'default_action', 'defaultaction', 'filters', 'filterwarnings', 'formatwarning', 'linecache', 'once_registry', 'onceregistry', 'resetwarnings', 'showwarning', 'simplefilter', 'sys', 'types', 'warn', 'warn_explicit', 'warnpy3k']
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 22, in <module>
+    warnings.filterwarnings("ignore", category='UserWarning')
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/warnings.py", line 84, in filterwarnings
+    "category must be a class"
+AssertionError: category must be a class
+>>> help(warnings)
+Help on module warnings:
+
+NAME
+    warnings - Python part of the warnings subsystem.
+
+FILE
+    /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/warnings.py
+
+MODULE DOCS
+    http://docs.python.org/library/warnings
+
+CLASSES
+    __builtin__.object
+        catch_warnings
+    
+    class catch_warnings(__builtin__.object)
+     |  A context manager that copies and restores the warnings filter upon
+     |  exiting the context.
+     |  
+     |  The 'record' argument specifies whether warnings should be captured by a
+     |  custom implementation of warnings.showwarning() and be appended to a list
+     |  returned by the context manager. Otherwise None is returned by the context
+     |  manager. The objects appended to the list are arguments whose attributes
+     |  mirror the arguments to showwarning().
+     |  
+     |  The 'module' argument is to specify an alternative module to the module
+     |  named 'warnings' and imported under that name. This argument is only useful
+     |  when testing the warnings module itself.
+     |  
+     |  Methods defined here:
+     |  
+     |  __enter__(self)
+     |  
+     |  __exit__(self, *exc_info)
+     |  
+     |  __init__(self, record=False, module=None)
+     |      Specify whether to record warnings and if an alternative module
+     |      should be used other than sys.modules['warnings'].
+     |      
+     |      For compatibility with Python 3.0, please consider all arguments to be
+     |      keyword-only.
+     |  
+     |  __repr__(self)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+
+FUNCTIONS
+    filterwarnings(action, message='', category=<type 'exceptions.Warning'>, module='', lineno=0, append=0)
+        Insert an entry into the list of warnings filters (at the front).
+        
+        'action' -- one of "error", "ignore", "always", "default", "module",
+                    or "once"
+        'message' -- a regex that the warning message must match
+        'category' -- a class that the warning must be a subclass of
+        'module' -- a regex that the module name must match
+        'lineno' -- an integer line number, 0 matches all warnings
+        'append' -- if true, append to the list of filters
+    
+    formatwarning(message, category, filename, lineno, line=None)
+        Function to format a warning the standard way.
+    
+    resetwarnings()
+        Clear the list of warning filters, so that no filters are active.
+    
+    showwarning = idle_showwarning_subproc(message, category, filename, lineno, file=None, line=None)
+        Show Idle-format warning after replacing warnings.showwarning.
+        
+        The only difference is the formatter called.
+    
+    simplefilter(action, category=<type 'exceptions.Warning'>, lineno=0, append=0)
+        Insert a simple entry into the list of warnings filters (at the front).
+        
+        A simple filter matches all modules and messages.
+        'action' -- one of "error", "ignore", "always", "default", "module",
+                    or "once"
+        'category' -- a class that the warning must be a subclass of
+        'lineno' -- an integer line number, 0 matches all warnings
+        'append' -- if true, append to the list of filters
+    
+    warn(...)
+        Issue a warning, or maybe ignore it or raise an exception.
+    
+    warn_explicit(...)
+        Low-level inferface to warnings functionality.
+
+DATA
+    __all__ = ['warn', 'warn_explicit', 'showwarning', 'formatwarning', 'f...
+
+
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 22, in <module>
+    warnings.filterwarnings("ignore", category='UserWarning')
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/warnings.py", line 84, in filterwarnings
+    "category must be a class"
+AssertionError: category must be a class
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+11.1803398875
+
+Warning (from warnings module):
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 13
+    warnings.warn('Caution, taking a square root of a negative number')
+UserWarning: Caution, taking a square root of a negative number
+11.1803398875j
+14.6969384567
+14.6969384567j
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+11.1803398875
+11.1803398875j
+14.6969384567
+14.6969384567j
+>>> 
+======= RESTART: /Users/raymond/Dropbox/Public/sj134/warnings_demo.py =======
+11.1803398875
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 25, in <module>
+    print user(-5)
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 17, in user
+    return sqrt(x ** 3)
+  File "/Users/raymond/Dropbox/Public/sj134/warnings_demo.py", line 13, in sqrt
+    warnings.warn('Caution, taking a square root of a negative number')
+UserWarning: Caution, taking a square root of a negative number
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+>>> welcome()
+'Howdy!'
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 14:09:15] "GET / HTTP/1.1" 200 6
+127.0.0.1 - - [25/Feb/2016 14:09:15] "GET /favicon.ico HTTP/1.1" 404 742
+127.0.0.1 - - [25/Feb/2016 14:10:48] "GET / HTTP/1.1" 200 6
+127.0.0.1 - - [25/Feb/2016 14:11:23] "GET / HTTP/1.1" 200 6
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 14:12:36] "GET / HTTP/1.1" 200 6
+127.0.0.1 - - [25/Feb/2016 14:12:50] "GET / HTTP/1.1" 200 6
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 14:13:34] "GET / HTTP/1.1" 200 24
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 14:13:44] "GET / HTTP/1.1" 200 24
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+>>> 
+KeyboardInterrupt
+>>> 
+>>> 
+>>> import time
+>>> time.time()
+1456438537.75225
+>>> time.ctime()
+'Thu Feb 25 14:15:44 2016'
+>>> time.ctime()
+'Thu Feb 25 14:15:55 2016'
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+>>> show_time()
+'Thu Feb 25 14:16:39 2016'
+>>> show_time()
+'Thu Feb 25 14:16:42 2016'
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 14:17:16] "GET / HTTP/1.1" 200 24
+127.0.0.1 - - [25/Feb/2016 14:17:23] "GET /now HTTP/1.1" 200 24
+127.0.0.1 - - [25/Feb/2016 14:17:42] "GET /now HTTP/1.1" 200 24
+127.0.0.1 - - [25/Feb/2016 14:17:45] "GET /now HTTP/1.1" 200 24
+127.0.0.1 - - [25/Feb/2016 14:17:46] "GET /now HTTP/1.1" 200 24
+127.0.0.1 - - [25/Feb/2016 14:17:49] "GET /now HTTP/1.1" 200 24
+127.0.0.1 - - [25/Feb/2016 14:17:50] "GET /now HTTP/1.1" 200 24
+127.0.0.1 - - [25/Feb/2016 14:18:03] "GET /now HTTP/1.1" 200 24
+>>> 
+>>> import os
+>>> os.getcwd()
+'/Users/raymond/Dropbox/Public/sj134'
+>>> os.chdir('notes')
+>>> os.getcwd()
+'/Users/raymond/Dropbox/Public/sj134/notes'
+>>> os.chdir('..')
+>>> os.getcwd()
+'/Users/raymond/Dropbox/Public/sj134'
+>>> os.listdir('notes')
+['__init__.py', 'adjectives.txt', 'algebra.py', 'autodiff.py', 'circuitous.log', 'circuitous.py', 'client.py', 'common_passwords.txt', 'dayfour.log', 'dayone.log', 'daythree.log', 'daytwo.log', 'decorator_school.py', 'download.py', 'etag_db.dat', 'etag_db.dir', 'fibo.cover', 'fibo.py', 'frequency.py', 'hamlet.txt', 'IntermediatePython.pdf', 'itty.py', 'links.txt', 'lru_cache.py', 'monkey_patching.py', 'mpl_demo.py', 'pexpect.py', 'property_demo.py', 'PythonAwesome.pdf', 'PythonTips.pdf', 'redirect.py', 'show_args.py', 'sorting_dicts.py', 'spelling.py', 'term.txt', 'upload.html', 'validators.py', 'with_demo.py']
+>>> {'dir': 'notes', 'time': time.time(), 'files':os.listdir('notes')}
+{'files': ['__init__.py', 'adjectives.txt', 'algebra.py', 'autodiff.py', 'circuitous.log', 'circuitous.py', 'client.py', 'common_passwords.txt', 'dayfour.log', 'dayone.log', 'daythree.log', 'daytwo.log', 'decorator_school.py', 'download.py', 'etag_db.dat', 'etag_db.dir', 'fibo.cover', 'fibo.py', 'frequency.py', 'hamlet.txt', 'IntermediatePython.pdf', 'itty.py', 'links.txt', 'lru_cache.py', 'monkey_patching.py', 'mpl_demo.py', 'pexpect.py', 'property_demo.py', 'PythonAwesome.pdf', 'PythonTips.pdf', 'redirect.py', 'show_args.py', 'sorting_dicts.py', 'spelling.py', 'term.txt', 'upload.html', 'validators.py', 'with_demo.py'], 'dir': 'notes', 'time': 1456438801.71614}
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+>>> 
+KeyboardInterrupt
+>>> display_files()
+{'files': ['__init__.py', 'adjectives.txt', 'algebra.py', 'autodiff.py', 'circuitous.log', 'circuitous.py', 'client.py', 'common_passwords.txt', 'dayfour.log', 'dayone.log', 'daythree.log', 'daytwo.log', 'decorator_school.py', 'download.py', 'etag_db.dat', 'etag_db.dir', 'fibo.cover', 'fibo.py', 'frequency.py', 'hamlet.txt', 'IntermediatePython.pdf', 'itty.py', 'links.txt', 'lru_cache.py', 'monkey_patching.py', 'mpl_demo.py', 'pexpect.py', 'property_demo.py', 'PythonAwesome.pdf', 'PythonTips.pdf', 'redirect.py', 'show_args.py', 'sorting_dicts.py', 'spelling.py', 'term.txt', 'upload.html', 'validators.py', 'with_demo.py'], 'dir': 'notes', 'time': 1456438865.277856}
+>>> display_files().keys()
+['files', 'dir', 'time']
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 14:21:59] "GET /files HTTP/1.1" 200 676
+127.0.0.1 - - [25/Feb/2016 14:22:13] "GET /files HTTP/1.1" 200 676
+127.0.0.1 - - [25/Feb/2016 14:22:50] "GET /files HTTP/1.1" 200 676
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+>>> uppercase_service('raymond')
+'RAYMOND'
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 14:25:10] "GET /upper/raymond HTTP/1.1" 200 7
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 862, in _handle
+    return route.call(**args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 1732, in wrapper
+    rv = callback(*a, **ka)
+  File "/Users/raymond/Dropbox/Public/sj134/rest_api_server.py", line 30, in display_query
+    print response.query
+AttributeError: 'LocalResponse' object has no attribute 'query'
+127.0.0.1 - - [25/Feb/2016 14:29:13] "GET /query HTTP/1.1" 500 1524
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+<bottle.FormsDict object at 0x1044c58d0>
+127.0.0.1 - - [25/Feb/2016 14:29:55] "GET /query HTTP/1.1" 200 3
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+[]
+127.0.0.1 - - [25/Feb/2016 14:30:28] "GET /query HTTP/1.1" 200 3
+[('x', '1'), ('name', 'raymond'), ('day', 'thursday')]
+127.0.0.1 - - [25/Feb/2016 14:30:59] "GET /query?x=1&name=raymond&day=thursday HTTP/1.1" 200 3
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 14:31:56] "GET /query?x=1&name=raymond&day=thursday HTTP/1.1" 500 820
+>>> import algebra
+>>> help(algebra)
+Help on module algebra:
+
+NAME
+    algebra - Fancy, expensive math package for rich people who have forgotten everything since 7th grade
+
+FILE
+    /Users/raymond/Dropbox/Public/sj134/algebra.py
+
+FUNCTIONS
+    area(radius)
+        Compute the area of a circle
+        
+        >>> area(10)
+        314.15700000000004
+    
+    area_triangle(base, height)
+        Return the area of a triangle
+        
+        >>> area_triangle(base=10, height=6)
+        30.0
+    
+    quadratic(a, b, c)
+        Return two root of the quadratic equation:  ax^2 + bx + c = 0
+        
+        >>> x1, x2 = quadratic(a=8, b=22, c=15)
+        >>> 8 * x1**2.0 + 22 * x1 + 15
+        0.0
+        >>> 8 * x2**2.0 + 22 * x2 + 15
+        0.0
+        >>> x1, x2
+        (-1.25, -1.5)
+
+DATA
+    pi = 3.14157
+
+
+>>> algebra.area_triangle(20, 30)
+300.0
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 14:36:35] "GET /query?x=1&name=raymond&day=thursday HTTP/1.1" 404 768
+Tri 0.0 0.0
+127.0.0.1 - - [25/Feb/2016 14:36:46] "GET /area/triangle HTTP/1.1" 200 3
+Tri 15.0 20.0
+127.0.0.1 - - [25/Feb/2016 14:37:18] "GET /area/triangle?base=15&height=20 HTTP/1.1" 200 3
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+Tri 15.0 20.0 150.0
+127.0.0.1 - - [25/Feb/2016 14:38:32] "GET /area/triangle?base=15&height=20 HTTP/1.1" 200 3
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 14:40:36] "GET /area/triangle?base=15&height=20 HTTP/1.1" 200 74
+127.0.0.1 - - [25/Feb/2016 14:40:59] "GET /fileshttp://localhost:8080/files HTTP/1.1" 404 788
+127.0.0.1 - - [25/Feb/2016 14:41:30] "GET /area/triangle?base=15&height=20 HTTP/1.1" 200 74
+127.0.0.1 - - [25/Feb/2016 14:42:14] "GET /area/triangle?base=15&height=20 HTTP/1.1" 200 74
+127.0.0.1 - - [25/Feb/2016 14:42:54] "GET /area/triangle?base=15&height=20 HTTP/1.1" 200 74
+127.0.0.1 - - [25/Feb/2016 14:43:28] "GET /area/triangle?base=400&height=50 HTTP/1.1" 200 77
+>>> 
+>>> 
+>>> import algebra
+>>> help(algerbra)
+
+Traceback (most recent call last):
+  File "<pyshell#92>", line 1, in <module>
+    help(algerbra)
+NameError: name 'algerbra' is not defined
+>>> help(algebra)
+Help on module algebra:
+
+NAME
+    algebra - Fancy, expensive math package for rich people who have forgotten everything since 7th grade
+
+FILE
+    /Users/raymond/Dropbox/Public/sj134/algebra.py
+
+FUNCTIONS
+    area(radius)
+        Compute the area of a circle
+        
+        >>> area(10)
+        314.15700000000004
+    
+    area_triangle(base, height)
+        Return the area of a triangle
+        
+        >>> area_triangle(base=10, height=6)
+        30.0
+    
+    quadratic(a, b, c)
+        Return two root of the quadratic equation:  ax^2 + bx + c = 0
+        
+        >>> x1, x2 = quadratic(a=8, b=22, c=15)
+        >>> 8 * x1**2.0 + 22 * x1 + 15
+        0.0
+        >>> 8 * x2**2.0 + 22 * x2 + 15
+        0.0
+        >>> x1, x2
+        (-1.25, -1.5)
+
+DATA
+    pi = 3.14157
+
+
+>>> # localhost:8080/quadratic?a=8&b=22&c=15
+>>> # After you build the service,
+>>> # then build a client modeled after github_rest_api.py
+>>> #   requests.get('localhost:8080/quadratic', dict(a=8, b=22, c=15)) ...
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+8.0 22.0 15.0 quad
+127.0.0.1 - - [25/Feb/2016 15:10:08] "GET /quadratic?a=8&b=22&c=15 HTTP/1.1" 200 3
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+8.0 22.0 15.0 --> (-1.25, -1.5)
+127.0.0.1 - - [25/Feb/2016 15:10:55] "GET /quadratic?a=8&b=22&c=15 HTTP/1.1" 200 3
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+8.0 22.0 15.0 -->Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 862, in _handle
+    return route.call(**args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 1732, in wrapper
+    rv = callback(*a, **ka)
+  File "/Users/raymond/Dropbox/Public/sj134/rest_api_server.py", line 49, in quadratic_solver
+    print a, b, c, '-->', result
+NameError: global name 'result' is not defined
+127.0.0.1 - - [25/Feb/2016 15:12:02] "GET /quadratic?a=8&b=22&c=15 HTTP/1.1" 500 1520
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 15:12:13] "GET /quadratic?a=8&b=22&c=15 HTTP/1.1" 200 82
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 862, in _handle
+    return route.call(**args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 1732, in wrapper
+    rv = callback(*a, **ka)
+  File "/Users/raymond/Dropbox/Public/sj134/rest_api_server.py", line 48, in quadratic_solver
+    x1, x2 = algebra.quadratic(a, b, c)
+  File "/Users/raymond/Dropbox/Public/sj134/algebra.py", line 43, in quadratic
+    discriminant = math.sqrt(b ** 2.0 - 4.0 * a * c)
+ValueError: math domain error
+127.0.0.1 - - [25/Feb/2016 15:12:43] "GET /quadratic?a=8&b=8&c=15 HTTP/1.1" 500 1601
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 862, in _handle
+    return route.call(**args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 1738, in wrapper
+    json_response = dumps(rv)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 244, in dumps
+    return _default_encoder.encode(obj)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/encoder.py", line 207, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/encoder.py", line 270, in iterencode
+    return _iterencode(o, 0)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/encoder.py", line 184, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: (-0.5-1.2747548783981961j) is not JSON serializable
+127.0.0.1 - - [25/Feb/2016 15:13:14] "GET /quadratic?a=8&b=8&c=15 HTTP/1.1" 500 2054
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+8.0 8.0 15.0 --> (-0.5+1.2747548784j) (-0.5-1.2747548784j)
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 862, in _handle
+    return route.call(**args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 1738, in wrapper
+    json_response = dumps(rv)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 244, in dumps
+    return _default_encoder.encode(obj)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/encoder.py", line 207, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/encoder.py", line 270, in iterencode
+    return _iterencode(o, 0)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/encoder.py", line 184, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: (-0.5-1.2747548783981961j) is not JSON serializable
+127.0.0.1 - - [25/Feb/2016 15:13:45] "GET /quadratic?a=8&b=8&c=15 HTTP/1.1" 500 2054
+
+=============================== RESTART: Shell ===============================
+>>> c = (-0.5-1.2747548783981961j)
+>>> dir(c)
+['__abs__', '__add__', '__class__', '__coerce__', '__delattr__', '__div__', '__divmod__', '__doc__', '__eq__', '__float__', '__floordiv__', '__format__', '__ge__', '__getattribute__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__int__', '__le__', '__long__', '__lt__', '__mod__', '__mul__', '__ne__', '__neg__', '__new__', '__nonzero__', '__pos__', '__pow__', '__radd__', '__rdiv__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rmod__', '__rmul__', '__rpow__', '__rsub__', '__rtruediv__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', 'conjugate', 'imag', 'real']
+>>> c.real
+-0.5
+>>> c.image
+
+Traceback (most recent call last):
+  File "<pyshell#101>", line 1, in <module>
+    c.image
+AttributeError: 'complex' object has no attribute 'image'
+>>> c.imag
+-1.2747548783981961
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+8.0 8.0 15.0 --> (-0.5+1.2747548784j) (-0.5-1.2747548784j)
+127.0.0.1 - - [25/Feb/2016 15:15:51] "GET /quadratic?a=8&b=8&c=15 HTTP/1.1" 200 157
+22.0 8.0 15.0 --> (-0.181818181818+0.805456597576j) (-0.181818181818-0.805456597576j)
+127.0.0.1 - - [25/Feb/2016 15:16:13] "GET /quadratic?a=22&b=8&c=15 HTTP/1.1" 200 190
+8.0 22.0 15.0 --> -1.25 -1.5
+127.0.0.1 - - [25/Feb/2016 15:16:30] "GET /quadratic?a=8&b=22&c=15 HTTP/1.1" 200 128
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/quadratic_client.py ======
+
+Warning (from warnings module):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/cffi/model.py", line 526
+    % self._get_c_name())
+UserWarning: 'point_conversion_form_t' has no values explicitly defined; next version will refuse to guess which integer type it is meant to be (unsigned/signed, int/long)
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/quadratic_client.py", line 3, in <module>
+    result = requests.get('localhost:8080/quadratic', dict(a=8, b=22, c=15)).json()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/requests/api.py", line 67, in get
+    return request('get', url, params=params, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/requests/api.py", line 53, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/requests/sessions.py", line 468, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/requests/sessions.py", line 570, in send
+    adapter = self.get_adapter(url=request.url)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/requests/sessions.py", line 644, in get_adapter
+    raise InvalidSchema("No connection adapters were found for '%s'" % url)
+InvalidSchema: No connection adapters were found for 'localhost:8080/quadratic'
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+*/*
+127.0.0.1 - - [25/Feb/2016 15:20:58] "GET /quadratic?a=8&b=22&c=15 HTTP/1.1" 200 128
+text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+127.0.0.1 - - [25/Feb/2016 15:21:14] "GET /quadratic?a=8&b=22&c=15 HTTP/1.1" 200 128
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 15:22:43] "GET /quadratic?a=8&b=22&c=15 HTTP/1.1" 200 128
+127.0.0.1 - - [25/Feb/2016 15:22:49] "GET /quadratic?a=8&b=22&c=15 HTTP/1.1" 200 18
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 15:27:34] "GET /quadratic?a=8&b=22&c=15 HTTP/1.1" 200 274
+127.0.0.1 - - [25/Feb/2016 15:27:47] "GET /quadratic?a=8&b=22&c=15 HTTP/1.1" 200 128
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 15:31:34] "GET /quad HTTP/1.1" 404 728
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 15:31:47] "GET /quad HTTP/1.1" 200 414
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 862, in _handle
+    return route.call(**args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 1732, in wrapper
+    rv = callback(*a, **ka)
+  File "/Users/raymond/Dropbox/Public/sj134/rest_api_server.py", line 100, in html_quadratic_solver
+    a = float(request.form.get('a', '0.0'))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 1394, in __getattr__
+    raise AttributeError('Attribute %r not defined.' % name)
+AttributeError: Attribute 'form' not defined.
+127.0.0.1 - - [25/Feb/2016 15:35:24] "POST /quad HTTP/1.1" 500 1720
+127.0.0.1 - - [25/Feb/2016 15:35:39] "GET /quad HTTP/1.1" 200 414
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 862, in _handle
+    return route.call(**args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 1732, in wrapper
+    rv = callback(*a, **ka)
+  File "/Users/raymond/Dropbox/Public/sj134/rest_api_server.py", line 100, in html_quadratic_solver
+    a = float(request.forms.get('a', '0.0'))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/bottle.py", line 1394, in __getattr__
+    raise AttributeError('Attribute %r not defined.' % name)
+AttributeError: Attribute 'form' not defined.
+127.0.0.1 - - [25/Feb/2016 15:35:52] "POST /quad HTTP/1.1" 500 1721
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+8.0 22.0 15.0
+127.0.0.1 - - [25/Feb/2016 15:36:24] "POST /quad HTTP/1.1" 200 3
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 15:37:03] "GET /quad HTTP/1.1" 200 414
+127.0.0.1 - - [25/Feb/2016 15:37:05] "POST /quad HTTP/1.1" 200 274
+127.0.0.1 - - [25/Feb/2016 15:37:08] "GET /quad HTTP/1.1" 200 414
+127.0.0.1 - - [25/Feb/2016 15:37:14] "POST /quad HTTP/1.1" 200 274
+127.0.0.1 - - [25/Feb/2016 15:38:19] "GET /quad HTTP/1.1" 200 414
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 15:38:35] "GET /quad HTTP/1.1" 200 427
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 15:39:50] "GET /quad HTTP/1.1" 200 453
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 15:42:06] "GET /quad HTTP/1.1" 200 453
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 15:43:28] "POST /quad HTTP/1.1" 200 274
+127.0.0.1 - - [25/Feb/2016 15:43:33] "GET /quad HTTP/1.1" 200 455
+>>> 
+>>> 
+>>> import subprocess
+>>> s = subprocess.check_output(['netstat', '-i'])
+
+>>> s
+'Name  Mtu   Network       Address            Ipkts Ierrs    Opkts Oerrs  Coll\nlo0   16384 <Link#1>                         15180     0    15180     0     0\nlo0   16384 localhost   ::1                  15180     -    15180     -     -\nlo0   16384 127           localhost          15180     -    15180     -     -\nlo0   16384 fe80::1%lo0 fe80:1::1            15180     -    15180     -     -\ngif0* 1280  <Link#2>                             0     0        0     0     0\nstf0* 1280  <Link#3>                             0     0        0     0     0\nen0   1500  <Link#4>    b8:e8:56:32:cd:3c    41687     0    47148     0     0\nen0   1500  raymonds-20 fe80:4::bae8:56ff    41687     -    47148     -     -\nen0   1500  10.154.36/23  10.154.36.134      41687     -    47148     -     -\nen1   1500  <Link#5>    72:00:00:6b:25:e0        0     0        0     0     0\nen2   1500  <Link#6>    72:00:00:6b:25:e1        0     0        0     0     0\np2p0  2304  <Link#7>    0a:e8:56:32:cd:3c        0     0        0     0     0\nawdl0 1484  <Link#8>    7a:9e:92:22:ca:b8        0     0      195     0     0\nawdl0 1484  raymonds-20 fe80:8::789e:92ff        0     -      195     -     -\nbridg 1500  <Link#9>    ba:e8:56:23:e0:00        0     0        1     0     0\n'
+>>> 
+====== RESTART: /Users/raymond/Dropbox/Public/sj134/rest_api_server.py ======
+Bottle v0.12.9 server starting up (using WSGIRefServer())...
+Listening on http://localhost:8080/
+Hit Ctrl-C to quit.
+
+127.0.0.1 - - [25/Feb/2016 15:52:49] "GET /netstat HTTP/1.1" 200 1248
+>>> import random
+>>> random.choice('abcdef')
+'e'
+>>> import string
+>>> string.letters
+'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+>>> random.choice(string.letters)
+'C'
+>>> [random.choice(string.letters) for i in range(30)]
+['c', 'S', 'W', 'u', 'D', 'c', 'k', 'M', 'i', 'r', 'K', 'T', 'k', 'e', 'Z', 'I', 't', 'U', 'b', 'u', 'W', 'R', 'A', 'o', 'c', 'Z', 'k', 'E', 'L', 'C']
+>>> session_id = ''.join([random.choice(string.letters) for i in range(30)])
+>>> session_id
+'xfGyEWDEzHgELnsOtTUYLmCcwJBqZo'
+>>> # Wrap-up  ABCs
+>>> 
+>>> 
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+>>> d
+<__main__.DoubleSeq instance at 0x102f96c20>
+>>> d.seq
+'Hettinger'
+>>> len(d)
+5
+>>> 
+>>> d[0]
+'H'
+>>> d[1]
+'t'
+>>> d[5]
+
+Traceback (most recent call last):
+  File "<pyshell#125>", line 1, in <module>
+    d[5]
+  File "/Users/raymond/Dropbox/Public/sj134/abc_demo.py", line 20, in __getitem__
+    raise IndexError('Index out of range')
+IndexError: Index out of range
+>>> for x in d:
+	print x
+
+	
+H
+t
+i
+g
+r
+>>> list(d)
+['H', 't', 'i', 'g', 'r']
+>>> set(d)
+set(['i', 'H', 'r', 't', 'g'])
+>>> tuple(d)
+('H', 't', 'i', 'g', 'r')
+>>> max(d)
+'t'
+>>> min(d)
+'H'
+>>> sorted(d)
+['H', 'g', 'i', 'r', 't']
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+Htigr
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+HTIGR
+>>> d.data
+
+Traceback (most recent call last):
+  File "<pyshell#135>", line 1, in <module>
+    d.data
+AttributeError: DoubleSeq instance has no attribute 'data'
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+HTIGR
+>>> d.seq
+'Hettinger'
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+HTIGR
+12
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+HTIGR
+12
+['C', 'c', 'R', 'k', 'a', ' ', 'v', 'e', 'r', 'e', 'P', 'h']
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+HTIGR
+12
+['C', 'c', 'R', 'k', 'a', ' ', 'v', 'e', 'r', 'e', 'P', 'h']
+CCRKA VEREPH
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+HTIGR
+12
+['C', 'c', 'R', 'k', 'a', ' ', 'v', 'e', 'r', 'e', 'P', 'h']
+CCRKA VEREPH
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+HTIGR
+12
+['C', 'c', 'R', 'k', 'a', ' ', 'v', 'e', 'r', 'e', 'P', 'h']
+CCRKA VEREPH
+>>> d.uncapitalize()
+'htigr'
+>>> t.uncapitalize()
+'ccrka vereph'
+>>> 
+>>> 
+>>> dir(list)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__delslice__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__setslice__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>> 
+>>> 
+>>> s = [10, 20, 30, 20, 5]
+>>> for x in reversed(s):
+	print x
+
+	
+5
+20
+30
+20
+10
+>>> s.count(20)
+2
+>>> s.index(30)
+2
+>>> s.index(10)
+0
+>>> dir(tuple)
+['__add__', '__class__', '__contains__', '__delattr__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__getslice__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'count', 'index']
+>>> dir(str)
+['__add__', '__class__', '__contains__', '__delattr__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__getslice__', '__gt__', '__hash__', '__init__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '_formatter_field_name_split', '_formatter_parser', 'capitalize', 'center', 'count', 'decode', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'index', 'isalnum', 'isalpha', 'isdigit', 'islower', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/abc_demo.py", line 22, in <module>
+    from collections.abc import Sequence
+ImportError: No module named abc
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+HTIGR
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/abc_demo.py", line 59, in <module>
+    t = TripleSeq('Cisco Rocks and have embraced Python')
+TypeError: __init__() takes exactly 3 arguments (2 given)
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+HTIGR
+12
+['C', 'c', 'R', 'k', 'a', ' ', 'v', 'e', 'r', 'e', 'P', 'h']
+CCRKA VEREPH
+>>> d.count('t')
+1
+>>> d.count('i')
+1
+>>> d.count('t')
+1
+>>> d.index('i')
+2
+>>> d[2]
+'i'
+>>> for x in reversed(d):
+	print x
+
+	
+r
+g
+i
+t
+H
+>>> dir(t)
+['__abstractmethods__', '__class__', '__contains__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__hash__', '__init__', '__iter__', '__len__', '__metaclass__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_abc_cache', '_abc_negative_cache', '_abc_negative_cache_version', '_abc_registry', 'capitalize', 'count', 'index', 'seq', 'uncapitalize']
+>>> 
+>>> 
+>>> c = Capper()
+>>> dir(c)
+['__doc__', '__module__', 'capitalize']
+>>> c.capitalize()
+
+Traceback (most recent call last):
+  File "<pyshell#166>", line 1, in <module>
+    c.capitalize()
+  File "/Users/raymond/Dropbox/Public/sj134/abc_demo.py", line 13, in capitalize
+    return ''.join(self).upper()
+TypeError: can only join an iterable
+>>> 
+>>> 
+>>> s = Sequence()
+
+Traceback (most recent call last):
+  File "<pyshell#169>", line 1, in <module>
+    s = Sequence()
+TypeError: Can't instantiate abstract class Sequence with abstract methods __getitem__, __len__
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+
+Traceback (most recent call last):
+  File "/Users/raymond/Dropbox/Public/sj134/abc_demo.py", line 51, in <module>
+    d = DoubleSeq("Hettinger")
+TypeError: Can't instantiate abstract class DoubleSeq with abstract methods __len__
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+HTIGR
+12
+['C', 'c', 'R', 'k', 'a', ' ', 'v', 'e', 'r', 'e', 'P', 'h']
+CCRKA VEREPH
+>>> c = Capper()
+>>> c.capitalize()
+''
+>>> 
+========== RESTART: /Users/raymond/Dropbox/Public/sj134/abc_demo.py ==========
+5
+H t i
+HTIGR
+12
+['C', 'c', 'R', 'k', 'a', ' ', 'v', 'e', 'r', 'e', 'P', 'h']
+CCRKA VEREPH
+>>> c = Capper()
+
+Traceback (most recent call last):
+  File "<pyshell#172>", line 1, in <module>
+    c = Capper()
+TypeError: Can't instantiate abstract class Capper with abstract methods __getitem__
+>>> d
+<__main__.DoubleSeq object at 0x103964f10>
+>>> d.capitalize()
+'HTIGR'
+>>> 

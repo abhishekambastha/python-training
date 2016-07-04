@@ -1,0 +1,561 @@
+changeset:   9:e36b08fc9563
+tag:         tip
+user:        Raymond Hettinger <python@rcn.com>
+date:        Wed Feb 24 11:42:10 2016 -0800
+summary:     Use the @decorator notation to simplify and beautify the code
+
+diff --git a/circuitous.py b/circuitous.py
+--- a/circuitous.py
++++ b/circuitous.py
+@@ -26,7 +26,7 @@
+ # Micromanagement is telling someone HOW do to their job rather than WHAT to do
+ 
+ import math
+-from collections import namedtuple   # named tuples make code more self-documenting
++from collections import namedtuple      # named tuples make code more self-documenting
+ 
+ Version = namedtuple('Version', ['major', 'minor', 'micro'])
+ 
+@@ -35,7 +35,7 @@
+ 
+     __slots__ = ['diameter']            # implement the flyweight design pattern to save memory by suppressing instance dicts in favor of fixed slots
+ 
+-    version = Version(0, 10, 1)         # class attributes are shared by all instances
++    version = Version(0, 11, 1)         # class attributes are shared by all instances
+ 
+     def __init__(self, radius):
+         self.radius = radius            # instance variables have data unique to each instance
+@@ -57,32 +57,24 @@
+     def __repr__(self):
+         return '%s(%r)' % (self.__class__.__name__, self.radius)
+ 
++    @staticmethod                                   # Reprogram the dot to NOT add self as the first argument
+     def angle_to_grade(angle):                      # Static methods are used to add regular functions to classes to improve findability
+         'Convert an inclinometer reading in degrees to a percent grade'
+         return math.tan(math.radians(angle)) * 100.0
+ 
+-    angle_to_grade = staticmethod(angle_to_grade)   # Reprogram the dot to NOT add self as the first argument
+-
++    @classmethod                                    # Reprograms the dot to add cls instead of self
+     def from_bbd(cls, bbd):                         # Class methods are used to add subclassable alternative constructors
+         'Create a new circle from a bounding box diagonal'
+         radius = bbd / 2.0 / math.sqrt(2.0)
+         return cls(radius)
+ 
+-    from_bbd = classmethod(from_bbd)                # Reprograms the dot to add cls instead of self
+-
+-    def get_radius(self):
++    @property                                       # Reprograms the dot to convert attribute access like c.radius to method access like c.get_radius()
++    def radius(self):
+         return self.diameter / 2.0
+ 
+-    def set_radius(self, radius):
++    @radius.setter
++    def radius(self, radius):
+         self.diameter = radius * 2.0
+ 
+-    # FGM:  I wish that everywhere someone wrote
+-    # c.radius that MAGICALLY c.get_radius()
+-    # would be called without me changing ANY code,
+-    # AND I wish that everywhere someone wrote
+-    # c.radius=value that MAGICALLY c.set_radius(value)
+-    # would be called without me changing ANY code.
+ 
+-    radius = property(get_radius, set_radius)      # Reprograms the dot to convert attribute access like c.radius to method access like c.get_radius()
+ 
+-
+
+changeset:   8:c0d8acfeed77
+user:        Raymond Hettinger <python@rcn.com>
+date:        Tue Feb 23 15:18:33 2016 -0800
+summary:     Save memory for academic users with __slots__ to implement the flyweight design pattern
+
+diff --git a/circuitous.py b/circuitous.py
+--- a/circuitous.py
++++ b/circuitous.py
+@@ -33,7 +33,9 @@
+ class Circle(object):
+     'An advanced circle analytic toolkit'
+ 
+-    version = Version(0, 9, 1)          # class attributes are shared by all instances
++    __slots__ = ['diameter']            # implement the flyweight design pattern to save memory by suppressing instance dicts in favor of fixed slots
++
++    version = Version(0, 10, 1)         # class attributes are shared by all instances
+ 
+     def __init__(self, radius):
+         self.radius = radius            # instance variables have data unique to each instance
+@@ -81,5 +83,6 @@
+     # c.radius=value that MAGICALLY c.set_radius(value)
+     # would be called without me changing ANY code.
+ 
+-    radius = property(get_radius, set_radius)
++    radius = property(get_radius, set_radius)      # Reprograms the dot to convert attribute access like c.radius to method access like c.get_radius()
+ 
++
+diff --git a/client.py b/client.py
+--- a/client.py
++++ b/client.py
+@@ -15,7 +15,7 @@
+ from random import seed, random
+ from pprint import pprint
+ 
+-n = 10
++n = 100000
+ jenny = 8675309
+ 
+ print 'DARPA grant proposal'
+@@ -24,7 +24,7 @@
+ print 'preliminary study using %d circles' % n
+ print "seeded using Jenny's number:", jenny
+ seed(jenny)
+-circles = [Circle(random()) for i in range(n)]
++circles = [Circle(random()) for i in xrange(n)]
+ areas = [circle.area() for circle in circles]
+ average_area = sum(areas) / n
+ print 'The average area is %.1f' % average_area
+
+changeset:   7:5614762659b6
+user:        Raymond Hettinger <python@rcn.com>
+date:        Tue Feb 23 15:06:50 2016 -0800
+summary:     Comply with ISO 10667 using property() to convert radius access to diameter lookup.
+
+diff --git a/circuitous.py b/circuitous.py
+--- a/circuitous.py
++++ b/circuitous.py
+@@ -33,7 +33,7 @@
+ class Circle(object):
+     'An advanced circle analytic toolkit'
+ 
+-    version = Version(0, 8, 1)          # class attributes are shared by all instances
++    version = Version(0, 9, 1)          # class attributes are shared by all instances
+ 
+     def __init__(self, radius):
+         self.radius = radius            # instance variables have data unique to each instance
+@@ -48,7 +48,7 @@
+         'Compute the closed line integral of the 2-D locus of points equidistant from a given point'
+         return 2.0 * math.pi * self.radius
+ 
+-    __perimeter = perimeter              # Automatic name mangling to _Circle__perimeter
++    __perimeter = perimeter              # Automatic name mangling to _Circle__perimeter to implement the Open Closed Principle
+ 
+     # Best practice for __repr__ is to look like how the object could have been creeated
+     # The word "self" is a misnomer.  It should mean "you or your children"
+@@ -67,3 +67,19 @@
+         return cls(radius)
+ 
+     from_bbd = classmethod(from_bbd)                # Reprograms the dot to add cls instead of self
++
++    def get_radius(self):
++        return self.diameter / 2.0
++
++    def set_radius(self, radius):
++        self.diameter = radius * 2.0
++
++    # FGM:  I wish that everywhere someone wrote
++    # c.radius that MAGICALLY c.get_radius()
++    # would be called without me changing ANY code,
++    # AND I wish that everywhere someone wrote
++    # c.radius=value that MAGICALLY c.set_radius(value)
++    # would be called without me changing ANY code.
++
++    radius = property(get_radius, set_radius)
++
+diff --git a/client.py b/client.py
+--- a/client.py
++++ b/client.py
+@@ -89,6 +89,8 @@
+ # ISO 10666:  No circle software shall compute the area directly from a radius.
+ # It MUST first call perimeter and infer the radius or diameter indirectly.
+ 
++# ISO 10667:  No circle software shall store the radius.  It MUST store the
++# diameter and ONLY the diameter.
+ 
+ 
+ 
+
+changeset:   6:f013b3d01fe7
+user:        Raymond Hettinger <python@rcn.com>
+date:        Tue Feb 23 14:29:37 2016 -0800
+summary:     Comply with ISO 10666 using class local references to perimeter
+
+diff --git a/circuitous.py b/circuitous.py
+--- a/circuitous.py
++++ b/circuitous.py
+@@ -23,7 +23,7 @@
+ # After dogfooding -> Beta testing (external users)
+ # Technical Debt --> Temporarily avoiding refactoring in order to meet deadline
+ # the key is to have made plans to pay down the debt rather than letting it accumulate
+-
++# Micromanagement is telling someone HOW do to their job rather than WHAT to do
+ 
+ import math
+ from collections import namedtuple   # named tuples make code more self-documenting
+@@ -33,19 +33,23 @@
+ class Circle(object):
+     'An advanced circle analytic toolkit'
+ 
+-    version = Version(0, 6, 1)          # class attributes are shared by all instances
++    version = Version(0, 8, 1)          # class attributes are shared by all instances
+ 
+     def __init__(self, radius):
+         self.radius = radius            # instance variables have data unique to each instance
+ 
+     def area(self):
+         'Perform quadrature on a planar shape of uniform revolution'
+-        return math.pi * self.radius ** 2.0
++        p = self.__perimeter()          # Class local references for when you need "self" to really be you, so you keep a backup copy
++        radius = p / 2.0 / math.pi
++        return math.pi * radius ** 2.0
+ 
+     def perimeter(self):
+         'Compute the closed line integral of the 2-D locus of points equidistant from a given point'
+         return 2.0 * math.pi * self.radius
+ 
++    __perimeter = perimeter              # Automatic name mangling to _Circle__perimeter
++
+     # Best practice for __repr__ is to look like how the object could have been creeated
+     # The word "self" is a misnomer.  It should mean "you or your children"
+     def __repr__(self):
+diff --git a/client.py b/client.py
+--- a/client.py
++++ b/client.py
+@@ -56,6 +56,8 @@
+         return Circle.perimeter(self) * self.RUBBER_RATIO # Extending  The parent method is called and the results are modified
+         # return 2.0 * 3.14 * self.radius * 1.25          # Overriding:  The parent method never gets called
+ 
++    __perimeter = perimeter
++
+ class MonsterTire(Tire):
+     'Circle analytics with a perimeter corrected for the rubber on the tire'
+ 
+@@ -82,3 +84,11 @@
+ print 'and a perimeter of', c.perimeter()
+ print
+ 
++## US Gov't ##################################################################
++
++# ISO 10666:  No circle software shall compute the area directly from a radius.
++# It MUST first call perimeter and infer the radius or diameter indirectly.
++
++
++
++
+
+changeset:   5:61dedb319ad7
+user:        Raymond Hettinger <python@rcn.com>
+date:        Tue Feb 23 12:27:50 2016 -0800
+summary:     Add from bbd classmethod alternative constructor for the graphics company
+
+diff --git a/circuitous.py b/circuitous.py
+--- a/circuitous.py
++++ b/circuitous.py
+@@ -33,7 +33,7 @@
+ class Circle(object):
+     'An advanced circle analytic toolkit'
+ 
+-    version = Version(0, 5, 1)          # class attributes are shared by all instances
++    version = Version(0, 6, 1)          # class attributes are shared by all instances
+ 
+     def __init__(self, radius):
+         self.radius = radius            # instance variables have data unique to each instance
+@@ -56,3 +56,10 @@
+         return math.tan(math.radians(angle)) * 100.0
+ 
+     angle_to_grade = staticmethod(angle_to_grade)   # Reprogram the dot to NOT add self as the first argument
++
++    def from_bbd(cls, bbd):                         # Class methods are used to add subclassable alternative constructors
++        'Create a new circle from a bounding box diagonal'
++        radius = bbd / 2.0 / math.sqrt(2.0)
++        return cls(radius)
++
++    from_bbd = classmethod(from_bbd)                # Reprograms the dot to add cls instead of self
+diff --git a/client.py b/client.py
+--- a/client.py
++++ b/client.py
+@@ -72,3 +72,13 @@
+ print u'An inclinometer reading of 5\N{degree sign}',
+ print 'is a %.1f%% grade.' % Circle.angle_to_grade(5)
+ print
++
++## National Graphics Company #################################################
++
++c = Circle.from_bbd(25)
++print 'A circle with a bounding box diagonalof 25'
++print 'has a radius of', c.radius
++print 'an area of', c.area()
++print 'and a perimeter of', c.perimeter()
++print
++
+
+changeset:   4:46c88d5d55cd
+user:        Raymond Hettinger <python@rcn.com>
+date:        Tue Feb 23 11:52:21 2016 -0800
+summary:     Add angle to grade staticmethod to support the trucking company
+
+diff --git a/circuitous.py b/circuitous.py
+--- a/circuitous.py
++++ b/circuitous.py
+@@ -33,7 +33,7 @@
+ class Circle(object):
+     'An advanced circle analytic toolkit'
+ 
+-    version = Version(0, 4, 1)          # class attributes are shared by all instances
++    version = Version(0, 5, 1)          # class attributes are shared by all instances
+ 
+     def __init__(self, radius):
+         self.radius = radius            # instance variables have data unique to each instance
+@@ -51,4 +51,8 @@
+     def __repr__(self):
+         return '%s(%r)' % (self.__class__.__name__, self.radius)
+ 
++    def angle_to_grade(angle):                      # Static methods are used to add regular functions to classes to improve findability
++        'Convert an inclinometer reading in degrees to a percent grade'
++        return math.tan(math.radians(angle)) * 100.0
+ 
++    angle_to_grade = staticmethod(angle_to_grade)   # Reprogram the dot to NOT add self as the first argument
+diff --git a/client.py b/client.py
+--- a/client.py
++++ b/client.py
+@@ -66,3 +66,9 @@
+ print 'has an inner cut-out area of', t.area()
+ print 'and a rubber corrected perimeter of', t.perimeter()
+ print
++
++## National Trucking Company #################################################
++
++print u'An inclinometer reading of 5\N{degree sign}',
++print 'is a %.1f%% grade.' % Circle.angle_to_grade(5)
++print
+
+changeset:   3:282b19db492d
+user:        Raymond Hettinger <python@rcn.com>
+date:        Tue Feb 23 11:19:49 2016 -0800
+summary:     Make repr subclass friendly to support the Tire company.
+
+diff --git a/circuitous.py b/circuitous.py
+--- a/circuitous.py
++++ b/circuitous.py
+@@ -33,7 +33,7 @@
+ class Circle(object):
+     'An advanced circle analytic toolkit'
+ 
+-    version = Version(0, 1, 1)          # class attributes are shared by all instances
++    version = Version(0, 4, 1)          # class attributes are shared by all instances
+ 
+     def __init__(self, radius):
+         self.radius = radius            # instance variables have data unique to each instance
+@@ -47,7 +47,8 @@
+         return 2.0 * math.pi * self.radius
+ 
+     # Best practice for __repr__ is to look like how the object could have been creeated
++    # The word "self" is a misnomer.  It should mean "you or your children"
+     def __repr__(self):
+-        return 'Circle(%r)' % self.radius
++        return '%s(%r)' % (self.__class__.__name__, self.radius)
+ 
+ 
+diff --git a/client.py b/client.py
+--- a/client.py
++++ b/client.py
+@@ -44,3 +44,25 @@
+     print 'and a warm area of', circle.area()
+     print
+ 
++## National Tire Chain #######################################################
++
++class Tire(Circle):
++    'Circle analytics with a perimeter corrected for the rubber on the tire'
++
++    RUBBER_RATIO = 1.25
++
++    def perimeter(self):
++        'Perimeter corrected for the rubber on the tire'
++        return Circle.perimeter(self) * self.RUBBER_RATIO # Extending  The parent method is called and the results are modified
++        # return 2.0 * 3.14 * self.radius * 1.25          # Overriding:  The parent method never gets called
++
++class MonsterTire(Tire):
++    'Circle analytics with a perimeter corrected for the rubber on the tire'
++
++    RUBBER_RATIO = 1.50
++
++t = Tire(30)
++print 'A tire of radius %r inches' % t.radius
++print 'has an inner cut-out area of', t.area()
++print 'and a rubber corrected perimeter of', t.perimeter()
++print
+
+changeset:   2:3e4961c9cb24
+user:        Raymond Hettinger <python@rcn.com>
+date:        Tue Feb 23 11:02:18 2016 -0800
+summary:     Add perimeter() method to support the rubber sheet company.
+
+diff --git a/circuitous.py b/circuitous.py
+--- a/circuitous.py
++++ b/circuitous.py
+@@ -42,6 +42,10 @@
+         'Perform quadrature on a planar shape of uniform revolution'
+         return math.pi * self.radius ** 2.0
+ 
++    def perimeter(self):
++        'Compute the closed line integral of the 2-D locus of points equidistant from a given point'
++        return 2.0 * math.pi * self.radius
++
+     # Best practice for __repr__ is to look like how the object could have been creeated
+     def __repr__(self):
+         return 'Circle(%r)' % self.radius
+diff --git a/client.py b/client.py
+--- a/client.py
++++ b/client.py
+@@ -29,3 +29,18 @@
+ average_area = sum(areas) / n
+ print 'The average area is %.1f' % average_area
+ print
++
++## Rubber Sheet Company ######################################################
++
++template = [0.1, 0.2, 0.7]
++print 'Spec sheet for the template', template
++circles = [Circle(cut_radius) for cut_radius in template]
++for i, circle in enumerate(circles):
++    print 'Circle #%d' % i
++    print 'A rubber circle with a cut radius of', circle.radius
++    print 'has a perimeter of', circle.perimeter()
++    print 'and a cold area of', circle.area()
++    circle.radius *= 1.1        # circle.set_radius(circle.get_radius() * 1.1)
++    print 'and a warm area of', circle.area()
++    print
++
+
+changeset:   1:ff3b8785c67d
+user:        Raymond Hettinger <python@rcn.com>
+date:        Tue Feb 23 10:22:07 2016 -0800
+summary:     Add repr based on feedback from academia
+
+diff --git a/circuitous.py b/circuitous.py
+--- a/circuitous.py
++++ b/circuitous.py
+@@ -24,6 +24,7 @@
+ # Technical Debt --> Temporarily avoiding refactoring in order to meet deadline
+ # the key is to have made plans to pay down the debt rather than letting it accumulate
+ 
++
+ import math
+ from collections import namedtuple   # named tuples make code more self-documenting
+ 
+@@ -41,6 +42,8 @@
+         'Perform quadrature on a planar shape of uniform revolution'
+         return math.pi * self.radius ** 2.0
+ 
++    # Best practice for __repr__ is to look like how the object could have been creeated
++    def __repr__(self):
++        return 'Circle(%r)' % self.radius
+ 
+ 
+-
+diff --git a/client.py b/client.py
+--- a/client.py
++++ b/client.py
+@@ -1,5 +1,6 @@
+ "Show circuitous from the user's point of view"
+ 
++from __future__ import division
+ from circuitous import Circle
+ 
+ print u'Tutorial for Circuitous\N{trade mark sign}'
+@@ -8,3 +9,23 @@
+ print 'A circle with a radius of', c.radius
+ print 'has an area of', c.area()
+ print
++
++## Academic Friends ##########################################################
++
++from random import seed, random
++from pprint import pprint
++
++n = 10
++jenny = 8675309
++
++print 'DARPA grant proposal'
++print 'to study the average area of random circles'
++print 'using Circuitous version %d.%d' % Circle.version[:2]
++print 'preliminary study using %d circles' % n
++print "seeded using Jenny's number:", jenny
++seed(jenny)
++circles = [Circle(random()) for i in range(n)]
++areas = [circle.area() for circle in circles]
++average_area = sum(areas) / n
++print 'The average area is %.1f' % average_area
++print
+
+changeset:   0:416c939dfd82
+user:        Raymond Hettinger <python@rcn.com>
+date:        Mon Feb 22 17:14:01 2016 -0800
+summary:     An MVP circle class with area() method and a tutorial
+
+diff --git a/circuitous.py b/circuitous.py
+new file mode 100644
+--- /dev/null
++++ b/circuitous.py
+@@ -0,0 +1,46 @@
++''' Circuitous(tm)                               # Name of company or project
++An advanced circle analytics company             # Elevator Pitch <--> Mission Statement
++'''
++
++# The sole the purpose of inheritance is code re-use
++# New-style classes inherit from object that has __getattribute__ with a reprogrammable dot
++# We tend to document before we write code:  it is easy, it focuses the mind
++# "self" is a Python convention for the instance variable
++# When copying from one namespace to another, we typically keep the name the same
++# We don't tend to abbreviate in Python because of international audience
++# and because we lack type declarations.
++# We don't tend to put docstrings in dunder methods because 1) users don't see them
++# and 2) because they have a standard meaning.
++# D.R.Y. Principle == Do Not Repeat Yourself == There should be a single source of truth
++# Code Smell == Code that works but has understandability or maintenance issues
++# The purpose of modules is 1) to organize code and 2) as a principal tool for code reuse
++# Give "magic constants" a name and constants should have upper case letters in the name
++# "Code is your enemy" in particular, it is the enemy of agility.
++# "Clash" to with core problem directly and aggressively
++# MVP --> Minimum viable product is the smallest real solution to a real problem
++# YAGNI,RN --> You ain't gonna need it, right now.
++# Dogfooding --> Be the first user of your product
++# After dogfooding -> Beta testing (external users)
++# Technical Debt --> Temporarily avoiding refactoring in order to meet deadline
++# the key is to have made plans to pay down the debt rather than letting it accumulate
++
++import math
++from collections import namedtuple   # named tuples make code more self-documenting
++
++Version = namedtuple('Version', ['major', 'minor', 'micro'])
++
++class Circle(object):
++    'An advanced circle analytic toolkit'
++
++    version = Version(0, 1, 1)          # class attributes are shared by all instances
++
++    def __init__(self, radius):
++        self.radius = radius            # instance variables have data unique to each instance
++
++    def area(self):
++        'Perform quadrature on a planar shape of uniform revolution'
++        return math.pi * self.radius ** 2.0
++
++
++
++
+diff --git a/client.py b/client.py
+new file mode 100644
+--- /dev/null
++++ b/client.py
+@@ -0,0 +1,10 @@
++"Show circuitous from the user's point of view"
++
++from circuitous import Circle
++
++print u'Tutorial for Circuitous\N{trade mark sign}'
++print 'Software version %d.%d' % Circle.version[:2]
++c = Circle(10)
++print 'A circle with a radius of', c.radius
++print 'has an area of', c.area()
++print
+
